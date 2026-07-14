@@ -62,16 +62,62 @@
     color:var(--olive);
   }
 
-  /* HERO */
+  /* HERO con foto de fondo */
   .hero{
-    padding-top:5.5rem;
+    position:relative;
+    padding:0;
+    margin:0 -1.5rem;
+    min-height:92vh;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(155deg, var(--olive) 0%, var(--rose) 100%);
+    border-bottom:none;
+  }
+  .hero-photo{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 30%;
+  }
+  .hero-fallback-label{
+    position:absolute;
+    top:1.4rem;
+    left:50%;
+    transform:translateX(-50%);
+    color:rgba(251,247,239,0.85);
+    font-size:0.62rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    z-index:1;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(58,51,44,0.05) 0%, rgba(58,51,44,0.25) 55%, rgba(58,51,44,0.78) 100%);
+    z-index:1;
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    padding:0 1.5rem 3.2rem;
+    color:var(--paper);
+  }
+  .hero .eyebrow{
+    color:rgba(251,247,239,0.85);
   }
   .hero .ampersand{
     font-family:'Mrs Saint Delafield', cursive;
     font-size:2.6rem;
-    color:var(--rose);
+    color:#fff;
     display:block;
     margin:0.4rem 0;
+    text-shadow:0 4px 18px rgba(58,51,44,0.5);
   }
   .hero h1{
     font-family:'Cormorant Garamond', serif;
@@ -79,12 +125,18 @@
     font-size:clamp(2.4rem, 8vw, 3.6rem);
     margin:0.2rem 0;
     letter-spacing:0.02em;
+    color:var(--paper);
+    text-shadow:0 6px 24px rgba(58,51,44,0.55);
   }
   .hero .date-line{
     margin-top:1.4rem;
     font-style:italic;
     font-size:1.15rem;
-    color:var(--olive-dark);
+    color:var(--paper);
+    opacity:0.95;
+  }
+  .below-hero{
+    padding-top:4.5rem;
   }
   .divider{
     width:60px;
@@ -278,6 +330,38 @@
     .countdown{ gap:0.6rem; }
     .countdown .unit{ min-width:64px; padding:0.8rem 0.4rem; }
   }
+
+  /* ---- animación al hacer scroll ---- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s cubic-bezier(.22,.85,.3,1), transform 0.9s cubic-bezier(.22,.85,.3,1);
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .reveal-scale{
+    opacity:0;
+    transform:translateY(20px) scale(0.94);
+    transition:opacity 0.9s ease, transform 0.9s cubic-bezier(.22,.85,.3,1);
+  }
+  .reveal-scale.in-view{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+  .details-grid .detail.reveal:nth-child(1){ transition-delay:0s; }
+  .details-grid .detail.reveal:nth-child(2){ transition-delay:0.12s; }
+  .details-grid .detail.reveal:nth-child(3){ transition-delay:0.24s; }
+  .divider.reveal{ transition-delay:0.05s; }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .reveal-scale{
+      opacity:1 !important;
+      transform:none !important;
+      transition:none !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -287,12 +371,18 @@
 <div class="container">
 
   <section class="hero">
-    <div class="eyebrow">Nos casamos</div>
-    <span class="ampersand">&amp;</span>
-    <h1>Humberto<br>Angelica</h1>
-    <div class="date-line">15 de diciembre de 2026 · Huacho</div>
-    <div class="divider"></div>
-    <p class="invite-text">
+    <img class="hero-photo" src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg" alt="Humberto y Angelica" onerror="this.style.display='none';">
+    <div class="hero-content">
+      <div class="eyebrow">Nos casamos</div>
+      <span class="ampersand">&amp;</span>
+      <h1>Humberto<br>Angelica</h1>
+      <div class="date-line">15 de diciembre de 2026 · Huacho</div>
+    </div>
+  </section>
+
+  <section class="below-hero">
+    <div class="divider reveal"></div>
+    <p class="invite-text reveal">
       Con el corazón lleno de alegría y la bendición de nuestras familias,
       te invitamos a acompañarnos en el día en que uniremos nuestras vidas
       para siempre. Tu presencia es el regalo que más deseamos.
@@ -300,37 +390,37 @@
   </section>
 
   <section id="contador">
-    <div class="eyebrow">Falta tan poco</div>
-    <h2 class="section-title">Cuenta regresiva</h2>
-    <div class="countdown" id="countdown">
+    <div class="eyebrow reveal">Falta tan poco</div>
+    <h2 class="section-title reveal">Cuenta regresiva</h2>
+    <div class="countdown reveal-scale" id="countdown">
       <div class="unit"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
       <div class="unit"><span class="num" id="cd-hours">00</span><span class="label">Horas</span></div>
       <div class="unit"><span class="num" id="cd-mins">00</span><span class="label">Min</span></div>
       <div class="unit"><span class="num" id="cd-secs">00</span><span class="label">Seg</span></div>
     </div>
-    <p class="today-note" id="today-note"></p>
+    <p class="today-note reveal" id="today-note"></p>
 
-    <div class="calendar" style="margin-top:2.4rem;">
+    <div class="calendar reveal-scale" style="margin-top:2.4rem;">
       <div class="cal-month">Diciembre 2026</div>
       <div class="cal-grid" id="cal-grid"></div>
     </div>
   </section>
 
   <section id="detalles">
-    <div class="eyebrow">Información</div>
-    <h2 class="section-title">Detalles del gran día</h2>
+    <div class="eyebrow reveal">Información</div>
+    <h2 class="section-title reveal">Detalles del gran día</h2>
     <div class="details-grid">
-      <div class="detail">
+      <div class="detail reveal">
         <h3>Fecha</h3>
         <p>Martes 15 de diciembre de 2026</p>
         <p class="note">Hora: 5:00 p.m. (por confirmar / ajustar según tu horario real)</p>
       </div>
-      <div class="detail">
+      <div class="detail reveal">
         <h3>Lugar</h3>
         <p>Huacho, Perú</p>
         <p class="note">Nombre del local y dirección exacta — coloca aquí el dato del jardín, salón o iglesia elegido</p>
       </div>
-      <div class="detail">
+      <div class="detail reveal">
         <h3>Código de vestimenta</h3>
         <p>Formal</p>
         <p class="note">Colores sugeridos: tonos tierra, verde oliva, terracota — evitar blanco</p>
@@ -339,19 +429,19 @@
   </section>
 
   <section id="rsvp">
-    <div class="eyebrow">Confírmanos</div>
-    <h2 class="section-title">Cuenta con tu presencia</h2>
-    <p class="invite-text">
+    <div class="eyebrow reveal">Confírmanos</div>
+    <h2 class="section-title reveal">Cuenta con tu presencia</h2>
+    <p class="invite-text reveal">
       Te pedimos confirmar tu asistencia antes del 15 de noviembre de 2026,
       escribiéndonos por WhatsApp o llamada.
     </p>
-    <a class="rsvp-btn" href="https://wa.me/51936925206" target="_blank" rel="noopener">Confirmar asistencia</a>
-    <a class="rsvp-phone" href="tel:+51936925206">936 925 206</a>
+    <a class="rsvp-btn reveal" href="https://wa.me/51936925206?text=S%C3%AD%2C%20asistir%C3%A9" target="_blank" rel="noopener">Confirmar asistencia</a>
+    <a class="rsvp-phone reveal" href="tel:+51936925206">936 925 206</a>
   </section>
 
   <footer>
-    <div class="monogram">H &amp; A</div>
-    <div class="thanks">Gracias por ser parte de nuestra historia</div>
+    <div class="monogram reveal">H &amp; A</div>
+    <div class="thanks reveal">Gracias por ser parte de nuestra historia</div>
   </footer>
 
 </div>
@@ -432,6 +522,19 @@
   }
 
   buildCalendar();
+
+  // ---- Animación al hacer scroll ----
+  const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
