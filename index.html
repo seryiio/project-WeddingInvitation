@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humberto & Angelica</title>
+<title>Humberto & Alexandra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mrs+Saint+Delafield&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
@@ -132,7 +132,7 @@
     box-shadow:0 18px 34px -14px rgba(58,51,44,0.5);
     transform:translateY(10%) rotate(-2deg) scale(0.92);
     opacity:0;
-    transition:transform 1.4s cubic-bezier(.22,.85,.3,1), opacity 0.9s ease;
+    transition:transform 1.4s cubic-bezier(.22,.85,.3,1), opacity 0.6s ease;
     z-index:3;
   }
   .photo-card .photo-fallback{
@@ -172,7 +172,7 @@
     clip-path:polygon(0% 10%,6% 2%,12% 9%,18% 1%,24% 8%,30% 2%,36% 9%,42% 1%,48% 8%,54% 2%,60% 9%,66% 1%,72% 8%,78% 2%,84% 9%,90% 1%,96% 8%,100% 3%,100% 100%,0% 100%);
     opacity:0;
     z-index:4;
-    transition:transform 1.2s cubic-bezier(.22,.85,.3,1), opacity 1s ease;
+    transition:transform 1.2s cubic-bezier(.22,.85,.3,1), opacity 0.6s ease;
   }
   .paper-note.left{
     left:2%;
@@ -223,7 +223,7 @@
     font-size:1.05rem;
     letter-spacing:0.05em;
     z-index:6;
-    transition:opacity 0.5s ease 0.15s, transform 0.6s ease 0.15s;
+    transition:opacity 0.3s ease, transform 0.35s ease;
   }
 
   /* ---- estado abierto ---- */
@@ -237,17 +237,17 @@
   .envelope-wrap.open .photo-card{
     opacity:1;
     transform:translateY(-125%) rotate(-2deg) scale(1);
-    transition-delay:0.35s;
+    transition-delay:0.5s;
   }
   .envelope-wrap.open .paper-note.left{
     opacity:1;
     transform:translateY(-158%) translateX(-10%) rotate(-9deg);
-    transition-delay:0.75s;
+    transition-delay:0.85s;
   }
   .envelope-wrap.open .paper-note.right{
     opacity:1;
     transform:translateY(-140%) translateX(10%) rotate(8deg);
-    transition-delay:0.95s;
+    transition-delay:1.05s;
   }
   .envelope-wrap.open .prompt{
     opacity:0;
@@ -281,14 +281,14 @@
       <div class="reveal-zone">
         <div class="paper-note left">Dos vidas,<br>un mismo destino</div>
         <div class="photo-card">
-          <img src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg" alt="Humberto y Angelica"
+          <img src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg" alt="Humberto y Alexandra"
                onerror="this.style.display='none';">
         </div>
         <div class="paper-note right">Contigo,<br>para siempre</div>
       </div>
 
       <div class="flap"></div>
-      <div class="seal">H·A</div>
+      <div class="seal">H&A</div>
     </div>
   </div>
 
@@ -302,14 +302,13 @@
     opened = true;
     envelope.classList.add('open');
 
-    // al ultimo instante de la animacion, se desvanece y redirige
     setTimeout(() => {
       stage.classList.add('fade-out');
-    }, 2600);
+    }, 2800);
 
     setTimeout(() => {
       window.location.href = 'invitacion.html';
-    }, 3300);
+    }, 3500);
   });
 </script>
 </body>

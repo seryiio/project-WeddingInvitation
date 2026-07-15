@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Humberto & Angelica · 15 de diciembre</title>
+  <title>Humberto & Alexandra · 15 de diciembre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -127,23 +127,32 @@
       color: rgba(251, 247, 239, 0.85);
     }
 
+    .hero .names-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0.2rem 0;
+    }
+
     .hero .ampersand {
       font-family: 'Mrs Saint Delafield', cursive;
-      font-size: 2.6rem;
+      font-size: 2.2rem;
       color: #fff;
-      display: block;
-      margin: 0.4rem 0;
       text-shadow: 0 4px 18px rgba(58, 51, 44, 0.5);
+      line-height: 1;
+      transform: translateY(2px);
     }
 
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
-      font-size: clamp(2.4rem, 8vw, 3.6rem);
-      margin: 0.2rem 0;
+      font-size: clamp(2.2rem, 7vw, 3.2rem);
+      margin: 0;
       letter-spacing: 0.02em;
       color: var(--paper);
       text-shadow: 0 6px 24px rgba(58, 51, 44, 0.55);
+      line-height: 1;
     }
 
     .hero .date-line {
@@ -319,18 +328,52 @@
       opacity: 0.75;
     }
 
-    /* RSVP */
-    .rsvp-btn {
-      display: inline-block;
-      margin-top: 1.3rem;
-      padding: 0.85rem 2.2rem;
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.7rem;
+      padding: 0.55rem 1.3rem;
       border: 1px solid var(--olive-dark);
       border-radius: 2px;
       color: var(--olive-dark);
       text-decoration: none;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-size: 0.72rem;
+      font-size: 0.65rem;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .map-btn:hover {
+      background: var(--olive-dark);
+      color: var(--paper);
+    }
+
+    .map-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    /* RSVP */
+    .rsvp-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1.3rem;
+    }
+
+    .rsvp-btn {
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      border: 1px solid var(--olive-dark);
+      border-radius: 2px;
+      color: var(--olive-dark);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
       transition: background 0.3s ease, color 0.3s ease;
     }
 
@@ -585,11 +628,15 @@
   <div class="container">
 
     <section class="hero">
-      <img class="hero-photo" src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg" alt="Humberto y Angelica" onerror="this.style.display='none';">
+      <img class="hero-photo" src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg"
+        alt="Humberto y Alexandra" onerror="this.style.display='none';">
       <div class="hero-content">
         <div class="eyebrow">Nos casamos</div>
-        <span class="ampersand">&amp;</span>
-        <h1>Humberto<br>Angelica</h1>
+        <div class="names-line">
+          <h1>Humberto</h1>
+          <span class="ampersand">&amp;</span>
+          <h1>Alexandra</h1>
+        </div>
         <div class="date-line">15 de diciembre de 2026 · Huacho</div>
       </div>
     </section>
@@ -633,7 +680,7 @@
           </svg>
         </button>
         <div class="player-info">
-          <div class="track-name" id="trackName">Rest of My Life — Bruno Mars</div>
+          <div class="track-name" id="trackName">Perfect — Ed Sheeran</div>
           <div class="progress-row">
             <span class="progress-time cur" id="curTime">0:00</span>
             <div class="progress-track" id="progressTrack">
@@ -646,7 +693,7 @@
       <p class="player-note reveal">La canción que elegimos para acompañar nuestra historia</p>
       <p class="player-error" id="playerError" style="display:none;"></p>
       <audio id="audioEl" preload="metadata" loop
-        src="https://res.cloudinary.com/y3rmpmag/video/upload/v1784070235/Bruno_Mars_-_Rest_of_my_Life_Jane_The_Virgin_ro6tao.mp3">
+        src="https://res.cloudinary.com/y3rmpmag/video/upload/v1784139873/Ed_Sheeran_-_Perfect_smjaps.mp3">
       </audio>
     </section>
     <section id="detalles">
@@ -656,18 +703,24 @@
         <div class="detail reveal">
           <h3>Fecha</h3>
           <p>Martes 15 de diciembre de 2026</p>
-          <p class="note">Hora: 5:00 p.m. (por confirmar / ajustar según tu horario real)</p>
+          <p class="note">Hora: 5:00 p.m. (por confirmar)</p>
         </div>
         <div class="detail reveal">
           <h3>Lugar</h3>
-          <p>Huacho, Perú</p>
-          <p class="note">Nombre del local y dirección exacta — coloca aquí el dato del jardín, salón o iglesia elegido
-          </p>
+          <p>Iglesia Catedral San Bartolomé de Huacho</p>
+          <p class="note">Huacho, Perú</p>
+          <a class="map-btn" href="https://maps.app.goo.gl/BSQ5Chv2vWie54PMA" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+            </svg>
+            Cómo llegar
+          </a>
         </div>
         <div class="detail reveal">
           <h3>Código de vestimenta</h3>
           <p>Formal</p>
-          <p class="note">Colores sugeridos: tonos tierra, verde oliva, terracota — evitar blanco</p>
+          <p class="note">Colores sugeridos: ni idea mi loco — evitar blanco</p>
         </div>
       </div>
     </section>
@@ -679,10 +732,14 @@
         Te pedimos confirmar tu asistencia antes del 15 de noviembre de 2026,
         escribiéndonos por WhatsApp o llamada.
       </p>
-      <a class="rsvp-btn reveal"
-        href="https://wa.me/51936925206?text=%F0%9F%92%8D%20%C2%A1Hola!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20su%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
-        target="_blank" rel="noopener">Confirmar asistencia</a>
-      <a class="rsvp-phone reveal" href="tel:+51936925206">936 925 206</a>
+      <div class="rsvp-buttons">
+        <a class="rsvp-btn reveal"
+          href="https://wa.me/51904394806?text=%F0%9F%92%8D%20%C2%A1Hola%20Humberto!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
+          target="_blank" rel="noopener">Confirmar con el novio</a>
+        <a class="rsvp-btn reveal"
+          href="https://wa.me/51906980179?text=%F0%9F%92%8D%20%C2%A1Hola%20Alexandra!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
+          target="_blank" rel="noopener">Confirmar con la novia</a>
+      </div>
     </section>
 
     <footer>
