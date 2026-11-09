@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Humberto & Alexandra · 12 de diciembre</title>
+  <title>Invitación de boda</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -1260,21 +1260,21 @@
       object-fit: cover;
     }
 
-    .film-frame:nth-child(1) img {
+    .film-frame:nth-child(1) img[data-recorte] {
       transform: scale(2.6);
       transform-origin: 34% 4%;
     }
 
-    .film-frame:nth-child(2) img {
+    .film-frame:nth-child(2) img[data-recorte] {
       object-position: left center;
     }
 
-    .film-frame:nth-child(3) img {
+    .film-frame:nth-child(3) img[data-recorte] {
       transform: scale(3.2);
       transform-origin: 60% 75%;
     }
 
-    .film-frame:nth-child(4) img {
+    .film-frame:nth-child(4) img[data-recorte] {
       transform: scale(1.7);
       transform-origin: 43% 13%;
     }
@@ -1690,22 +1690,19 @@
   <div class="page">
     <main>
       <section class="hero" aria-labelledby="nombres">
-        <img class="hero-photo" src="ImagenBoda.jpg" alt="Humberto y Alexandra" width="5861" height="3907">
+        <img class="hero-photo" alt="" width="5861" height="3907">
         <div class="hero-content">
           <svg class="hero-flourish" aria-hidden="true">
             <use href="#art-hero-mark" />
           </svg>
           <p class="eyebrow">Nos casamos</p>
           <h1 class="names-line" id="nombres">
-            <span>Humberto <span class="ampersand">&amp;</span></span>
-            <span>Alexandra</span>
+            <span><span data-boda="novio"></span> <span class="ampersand">&amp;</span></span>
+            <span data-boda="novia"></span>
           </h1>
-          <p class="date-line">12 de diciembre de 2026 · Huacho</p>
-          <p class="invite-text">
-            Con el corazón lleno de alegría y la bendición de nuestras familias,
-            te invitamos a acompañarnos en el día en que uniremos nuestras vidas
-            para siempre. Tu presencia es el regalo que más deseamos.
-          </p>
+          </h1>
+          <p class="date-line" data-boda="fechaPortada"></p>
+          <p class="invite-text" data-boda="bienvenida"></p>
           <svg class="hero-rule" aria-hidden="true">
             <use href="#art-flourish" />
           </svg>
@@ -1722,15 +1719,12 @@
         <section class="film-reel" aria-label="Carrete de fotos">
           <div class="film-paper">
             <span class="film-tape" aria-hidden="true"></span>
-            <div class="film-scroll" tabindex="0" role="group" aria-label="Fotos de Humberto y Alexandra">
+            <div class="film-scroll" tabindex="0" role="group" aria-label="Fotos de la pareja">
               <ul class="filmstrip">
-                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Primer plano de Humberto y Alexandra"
-                    loading="lazy"></li>
-                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Humberto y Alexandra junto al lago"
-                    loading="lazy"></li>
-                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Detalle del ramo de novia" loading="lazy"></li>
-                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Retrato de la pareja con el paisaje de fondo"
-                    loading="lazy"></li>
+                <li class="film-frame"><img alt="" loading="lazy"></li>
+                <li class="film-frame"><img alt="" loading="lazy"></li>
+                <li class="film-frame"><img alt="" loading="lazy"></li>
+                <li class="film-frame"><img alt="" loading="lazy"></li>
               </ul>
             </div>
           </div>
@@ -1741,7 +1735,7 @@
           <svg class="icon" aria-hidden="true">
             <use href="#i-heart" />
           </svg>
-          <p>Será una alegría compartir con ustedes el día en que uniremos nuestras vidas.</p>
+          <p data-boda="despuesDelCarrete"></p>
         </div>
 
         <section id="familia" aria-labelledby="familia-titulo">
@@ -1761,23 +1755,21 @@
                 <use href="#i-people" />
               </svg>
               <h3>Padres de la novia</h3>
-              <p>Ruth esther Nuñez Florian</p>
-              <p>Jorge Gonzalo Yarleque Gonzáles</p>
+              <div id="padresDeLaNovia"></div>
             </div>
             <div class="family-card">
               <svg class="icon" aria-hidden="true">
                 <use href="#i-people" />
               </svg>
               <h3>Padres del novio</h3>
-              <p>Ingrid Margot esmir Leandro Briceño </p>
-              <p>Humberto Garro Prado</p>
+              <div id="padresDelNovio"></div>
             </div>
             <div class="family-card">
               <svg class="icon" aria-hidden="true">
                 <use href="#i-heart" />
               </svg>
               <h3>Padrinos de aros</h3>
-              <p>Deivid</p>
+              <div id="padrinosDeAros"></div>
             </div>
           </div>
           <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
@@ -1802,14 +1794,14 @@
             </h2>
             <p class="subtitle">Cuenta regresiva</p>
           </header>
-          <time class="countdown-date" id="wedding-date" datetime="2026-12-15T16:00:00-05:00">
-            <span class="ceremony-date-text">Sábado 12 de diciembre de 2026, a las 4:00 p. m. (hora de Perú)</span>
+          <time class="countdown-date" id="wedding-date">
+            <span class="ceremony-date-text" data-boda="fechaAccesible"></span>
             <span class="ceremony-date-art" aria-hidden="true">
-              <span class="ceremony-month">Diciembre</span>
-              <span class="ceremony-side">Martes</span>
-              <span class="ceremony-day">12</span>
-              <span class="ceremony-side">2026</span>
-              <span class="ceremony-hour">4:00 p. m. (hora de Perú)</span>
+              <span class="ceremony-month" data-boda="mes"></span>
+              <span class="ceremony-side" data-boda="diaSemana"></span>
+              <span class="ceremony-day" data-boda="dia"></span>
+              <span class="ceremony-side" data-boda="anio"></span>
+              <span class="ceremony-hour" data-boda="horaCeremonia"></span>
             </span>
           </time>
           <div class="countdown" id="countdown">
@@ -1823,7 +1815,7 @@
           <details class="calendar">
             <summary><svg class="icon" aria-hidden="true">
                 <use href="#i-calendar" />
-              </svg> Diciembre 2026</summary>
+              </svg> <span data-boda="mesCalendario"></span></summary>
             <div class="cal-grid" id="cal-grid"></div>
           </details>
           <svg class="paper-flow flip" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
@@ -1847,7 +1839,7 @@
               <use href="#art-song-polaroid" />
             </svg>
             <div class="player" id="audioPlayer">
-              <p class="track-name" id="trackName">Te Amo - Umberto Tozzi</p>
+              <p class="track-name" id="trackName" data-boda="cancion"></p>
               <div class="player-controls">
                 <button class="play-toggle" id="musicBtn" type="button" aria-label="Reproducir">
                   <svg class="icon icon-play" aria-hidden="true">
@@ -1878,7 +1870,7 @@
             </div>
           </div>
           <p class="player-error" id="playerError" role="status" hidden></p>
-          <audio id="audioEl" preload="metadata" loop src="Umberto Tozzi - Te Amo.mp3"></audio>
+          <audio id="audioEl" preload="metadata" loop></audio>
           <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
             <use href="#art-paper-flow" />
           </svg>
@@ -1906,8 +1898,8 @@
               <h3><svg class="icon" aria-hidden="true">
                   <use href="#i-calendar" />
                 </svg> Fecha</h3>
-              <p>Sábado 12 de diciembre de 2026</p>
-              <p class="note">Ceremonia a las 4:00 p. m.</p>
+              <p data-boda="fechaCompleta"></p>
+              <p class="note" data-boda="notaCeremonia"></p>
             </div>
             <div class="info-item">
               <h3><svg class="icon" aria-hidden="true">
@@ -1918,22 +1910,22 @@
                   <dt><svg class="icon" aria-hidden="true">
                       <use href="#i-suit" />
                     </svg><strong>Hombres</strong></dt>
-                  <dd>Formal</dd>
+                  <dd data-boda="hombres"></dd>
                 </div>
                 <div>
                   <dt><svg class="icon" aria-hidden="true">
                       <use href="#i-dress" />
                     </svg><strong>Mujeres</strong></dt>
-                  <dd>Formal</dd>
+                  <dd data-boda="mujeres"></dd>
                 </div>
               </dl>
-              <p class="note">Por favor, evita vestir de blanco y beige.</p>
+              <p class="note" data-boda="notaVestimenta"></p>
             </div>
             <div class="info-item">
               <h3><svg class="icon" aria-hidden="true">
                   <use href="#i-glasses" />
                 </svg> Recepción</h3>
-              <p><time datetime="18:00">6:00 p. m.</time></p>
+              <p><time data-horario="recepcion"></time></p>
             </div>
           </div>
           <div class="info-divider" aria-hidden="true">
@@ -1945,9 +1937,9 @@
             <h3><svg class="icon" aria-hidden="true">
                 <use href="#i-pin" />
               </svg> Lugar</h3>
-            <p id="ceremony-location">Iglesia Catedral San Bartolomé de Huacho</p>
-            <p class="note">Huacho, Perú</p>
-            <a class="map-btn" href="https://maps.app.goo.gl/BSQ5Chv2vWie54PMA" target="_blank" rel="noopener">
+            <p id="ceremony-location" data-boda="lugar"></p>
+            <p class="note" data-boda="ciudadPais"></p>
+            <a class="map-btn" id="mapaCeremonia" target="_blank" rel="noopener">
               <svg class="icon" aria-hidden="true">
                 <use href="#i-map" />
               </svg>
@@ -1991,26 +1983,26 @@
               <div>
                 <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
                       <use href="#i-rings" />
-                    </svg></span><time datetime="16:00">4:00 p. m.</time></dt>
-                <dd>Ceremonia</dd>
+                    </svg></span><time data-horario="ceremonia"></time></dt>
+                <dd data-boda="evento-ceremonia"></dd>
               </div>
               <div>
                 <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
                       <use href="#i-glasses" />
-                    </svg></span><time datetime="18:00">6:00 p. m.</time></dt>
-                <dd>Se casan p</dd>
+                    </svg></span><time data-horario="recepcion"></time></dt>
+                <dd data-boda="evento-recepcion"></dd>
               </div>
               <div>
                 <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
                       <use href="#i-dinner" />
-                    </svg></span><time datetime="20:00">8:00 p. m.</time></dt>
-                <dd>Cena</dd>
+                    </svg></span><time data-horario="cena"></time></dt>
+                <dd data-boda="evento-cena"></dd>
               </div>
               <div>
                 <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
                       <use href="#i-music" />
-                    </svg></span><time datetime="21:00">9:00 p. m.</time></dt>
-                <dd>Bailetón</dd>
+                    </svg></span><time data-horario="baile"></time></dt>
+                <dd data-boda="evento-baile"></dd>
               </div>
             </dl>
           </div>
@@ -2033,18 +2025,15 @@
                 </svg>
               </h2>
             </header>
-            <p class="invite-text">
-              Tu compañía es el mejor regalo. Si deseas tener un detalle con nosotros,
-              puedes hacerlo mediante una transferencia.
-            </p>
+            <p class="invite-text" data-boda="mensajeRegalos"></p>
             <div class="gifts-account">
               <svg class="icon" aria-hidden="true">
                 <use href="#i-bank" />
               </svg>
               <div>
-                <h3>Cuenta BCP</h3>
-                <p>N° Cuenta: 33597718988063</p>
-                <p>CCI: 00233519771898806384</p>
+                <h3 data-boda="banco"></h3>
+                <p data-boda="cuenta"></p>
+                <p data-boda="cci"></p>
               </div>
             </div>
           </div>
@@ -2069,25 +2058,22 @@
               </svg>
             </h2>
           </header>
-          <p class="invite-text">
-            Te pedimos confirmar tu asistencia antes del 15 de noviembre de 2026,
-            escribiéndonos por WhatsApp o llamada.
-          </p>
-          <p class="invite-text adults-only">
+          <p class="invite-text" data-boda="plazoConfirmacion"></p>
+          <p class="invite-text adults-only" id="avisoAdultos">
             <svg class="icon" aria-hidden="true">
               <use href="#i-people" />
             </svg>
-            <span>La celebración será solo para adultos. Gracias por tu comprensión.</span>
+            <span data-boda="avisoAdultos"></span>
           </p>
           <div class="rsvp-buttons">
 
             <a class="rsvp-btn"
-              href="https://wa.me/51904394806?text=%F0%9F%92%8D%20%C2%A1Hola%20Humberto!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
+              id="whatsappNovio"
               target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
                 <use href="#i-whatsapp" />
               </svg> Confirmar con el novio</a>
             <a class="rsvp-btn"
-              href="https://wa.me/51906980179?text=%F0%9F%92%8D%20%C2%A1Hola%20Alexandra!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
+              id="whatsappNovia"
               target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
                 <use href="#i-whatsapp" />
               </svg> Confirmar con la novia</a>
@@ -2101,35 +2087,120 @@
       <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
         <use href="#art-paper-flow" />
       </svg>
-      <div class="monogram footer-mark">H &amp; A</div>
+      <div class="monogram footer-mark" data-boda="monograma"></div>
       <div class="thanks">Gracias por ser parte de nuestra historia</div>
     </footer>
 
   </div>
 
+  <script src="datos-boda.js"></script>
   <script>
-    // ---- Fecha de la ceremonia en hora de Perú ----
-    const weddingDate = new Date(document.getElementById('wedding-date').dateTime);
+    const { pareja, familia, ceremonia, itinerario, vestimenta, confirmacion, regalos, musica, fotos, textos } = datosBoda;
+    const nombresPareja = pareja.novio + ' y ' + pareja.novia;
+    const weddingDateTime = ceremonia.fecha + 'T' + ceremonia.hora + ':00-05:00';
+    const weddingDate = new Date(weddingDateTime);
+    document.getElementById('wedding-date').dateTime = weddingDateTime;
 
-    const saveDate = document.getElementById('save-date');
-    const calendarTimestamp = date => date.toISOString().replace(/[-:]|\.\d{3}/g, '');
-    const ceremonyLocation = document.getElementById('ceremony-location').textContent.trim();
-    const calendarEvent = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//Humberto y Alexandra//Invitacion de boda//ES',
-      'BEGIN:VEVENT',
-      'UID:boda-humberto-y-alexandra-20261215@invitacion',
-      'DTSTAMP:' + calendarTimestamp(new Date()),
-      'DTSTART:' + calendarTimestamp(weddingDate),
-      'SUMMARY:Boda de Humberto y Alexandra',
-      'LOCATION:' + ceremonyLocation.replace(/[\\;,]/g, '\\$&').replace(/\r?\n/g, '\\n'),
-      'END:VEVENT',
-      'END:VCALENDAR',
-      ''
-    ].join('\r\n');
-    saveDate.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(calendarEvent);
-    saveDate.hidden = false;
+    // Las fechas sin hora se formatean en UTC para conservar el día en cualquier zona horaria.
+    function fechaCivil(fecha, opciones) {
+      return new Intl.DateTimeFormat('es-PE', { ...opciones, timeZone: 'UTC' })
+        .format(new Date(fecha + 'T00:00:00Z'));
+    }
+
+    function capitalizar(texto) {
+      return texto.charAt(0).toUpperCase() + texto.slice(1);
+    }
+
+    function mostrarHora(hora) {
+      const [horas, minutos] = hora.split(':');
+      const periodo = Number(horas) < 12 ? 'a. m.' : 'p. m.';
+      return (Number(horas) % 12 || 12) + ':' + minutos + ' ' + periodo;
+    }
+
+    const fechaLarga = { day: 'numeric', month: 'long', year: 'numeric' };
+    const diaSemana = capitalizar(fechaCivil(ceremonia.fecha, { weekday: 'long' }));
+    const fechaCompleta = diaSemana + ' ' + fechaCivil(ceremonia.fecha, fechaLarga);
+    const mes = capitalizar(fechaCivil(ceremonia.fecha, { month: 'long' }));
+    const anio = ceremonia.fecha.slice(0, 4);
+    const horaCeremonia = mostrarHora(ceremonia.hora);
+    const horaLocal = horaCeremonia + ' (hora de Perú)';
+    const horarios = {
+      ...itinerario,
+      ceremonia: { ...itinerario.ceremonia, hora: ceremonia.hora }
+    };
+    const contenido = {
+      novio: pareja.novio,
+      novia: pareja.novia,
+      fechaPortada: fechaCivil(ceremonia.fecha, fechaLarga) + ' · ' + ceremonia.ciudad,
+      bienvenida: textos.bienvenida,
+      despuesDelCarrete: textos.despuesDelCarrete,
+      fechaCompleta,
+      fechaAccesible: fechaCompleta + ', a las ' + horaLocal,
+      diaSemana,
+      dia: Number(ceremonia.fecha.slice(8, 10)),
+      mes,
+      anio,
+      horaCeremonia: horaLocal,
+      mesCalendario: mes + ' ' + anio,
+      notaCeremonia: 'Ceremonia a las ' + horaCeremonia,
+      lugar: ceremonia.lugar,
+      ciudadPais: ceremonia.ciudad + ', ' + ceremonia.pais,
+      hombres: vestimenta.hombres,
+      mujeres: vestimenta.mujeres,
+      notaVestimenta: vestimenta.nota,
+      cancion: musica.titulo,
+      banco: 'Cuenta ' + regalos.banco,
+      cuenta: 'N° Cuenta: ' + regalos.cuenta,
+      cci: 'CCI: ' + regalos.cci,
+      mensajeRegalos: regalos.mensaje,
+      plazoConfirmacion: 'Te pedimos confirmar tu asistencia antes del '
+        + fechaCivil(confirmacion.fechaLimite, fechaLarga) + ', escribiéndonos por WhatsApp o llamada.',
+      avisoAdultos: confirmacion.avisoAdultos,
+      monograma: pareja.novio.trim()[0] + ' & ' + pareja.novia.trim()[0]
+    };
+
+    for (const [clave, evento] of Object.entries(horarios)) {
+      contenido['evento-' + clave] = evento.nombre;
+    }
+    for (const elemento of document.querySelectorAll('[data-boda]')) {
+      elemento.textContent = contenido[elemento.dataset.boda];
+    }
+    for (const elemento of document.querySelectorAll('[data-horario]')) {
+      const { hora } = horarios[elemento.dataset.horario];
+      elemento.dateTime = hora;
+      elemento.textContent = mostrarHora(hora);
+    }
+    for (const [grupo, nombres] of Object.entries(familia)) {
+      const lista = document.getElementById(grupo);
+      for (const nombre of nombres) {
+        const parrafo = document.createElement('p');
+        parrafo.textContent = nombre;
+        lista.appendChild(parrafo);
+      }
+    }
+
+    document.title = pareja.novio + ' & ' + pareja.novia + ' · '
+      + fechaCivil(ceremonia.fecha, { day: 'numeric', month: 'long' });
+    const portada = document.querySelector('.hero-photo');
+    portada.alt = nombresPareja;
+    portada.src = fotos.portada;
+    document.querySelector('.film-scroll').setAttribute('aria-label', 'Fotos de ' + nombresPareja);
+    document.querySelectorAll('.film-frame img').forEach((imagen, posicion) => {
+      const foto = fotos.carrete[posicion];
+      imagen.alt = foto.descripcion.replaceAll('{pareja}', nombresPareja);
+      imagen.toggleAttribute('data-recorte', !foto.archivo);
+      imagen.src = foto.archivo || fotos.portada;
+    });
+
+    function enlaceWhatsApp(telefono, nombre) {
+      const mensaje = confirmacion.mensajeWhatsApp.replaceAll('{nombre}', nombre);
+      return 'https://wa.me/' + telefono + '?text=' + encodeURIComponent(mensaje);
+    }
+
+    document.getElementById('mapaCeremonia').href = ceremonia.mapa;
+    document.getElementById('whatsappNovio').href = enlaceWhatsApp(confirmacion.whatsappNovio, pareja.novio);
+    document.getElementById('whatsappNovia').href = enlaceWhatsApp(confirmacion.whatsappNovia, pareja.novia);
+    if (!confirmacion.soloAdultos) document.getElementById('avisoAdultos').remove();
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -2168,7 +2239,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ---- Calendario de diciembre 2026 ----
+    // ---- Calendario del mes de la ceremonia ----
     function buildCalendar() {
       const grid = document.getElementById('cal-grid');
       const dows = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
@@ -2179,7 +2250,8 @@
         grid.appendChild(el);
       });
 
-      const year = 2026, month = 11; // diciembre = index 11
+      const [year, monthNumber, weddingDay] = weddingDateTime.slice(0, 10).split('-').map(Number);
+      const month = monthNumber - 1;
       const firstDay = new Date(year, month, 1).getDay(); // 0 = domingo
       const totalDays = new Date(year, month + 1, 0).getDate();
 
@@ -2196,13 +2268,35 @@
         const cell = document.createElement('div');
         cell.className = 'day';
         cell.textContent = d;
-        if (d === 15) cell.classList.add('wedding-day');
+        if (d === weddingDay) cell.classList.add('wedding-day');
         if (isSameMonth && d === now.getDate()) cell.classList.add('today');
         grid.appendChild(cell);
       }
     }
 
     buildCalendar();
+
+    const saveDate = document.getElementById('save-date');
+    if (saveDate) {
+      const calendarTimestamp = date => date.toISOString().replace(/[-:]|\.\d{3}/g, '');
+      const ceremonyLocation = ceremonia.lugar;
+      const calendarEvent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Invitacion de boda//ES',
+        'BEGIN:VEVENT',
+        'UID:boda-humberto-y-alexandra-20261215@invitacion',
+        'DTSTAMP:' + calendarTimestamp(new Date()),
+        'DTSTART:' + calendarTimestamp(weddingDate),
+        'SUMMARY:Boda de ' + nombresPareja,
+        'LOCATION:' + ceremonyLocation.replace(/[\\;,]/g, '\\$&').replace(/\r?\n/g, '\\n'),
+        'END:VEVENT',
+        'END:VCALENDAR',
+        ''
+      ].join('\r\n');
+      saveDate.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(calendarEvent);
+      saveDate.hidden = false;
+    }
 
     const audio = document.getElementById('audioEl');
     const musicBtn = document.getElementById('musicBtn');
@@ -2257,6 +2351,7 @@
 
     audio.addEventListener('error', handleAudioError);
     if (audio.error) handleAudioError();
+    audio.src = musica.archivo;
     syncDuration();
 
     musicBtn.addEventListener('click', async () => {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humberto & Alexandra</title>
+<title>Invitación de boda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mrs+Saint+Delafield&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
@@ -281,18 +281,28 @@
       <div class="reveal-zone">
         <div class="paper-note left">Dos vidas,<br>un mismo destino</div>
         <div class="photo-card">
-          <img src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg" alt="Humberto y Alexandra"
+          <img id="fotoSobre" alt=""
                onerror="this.style.display='none';">
         </div>
         <div class="paper-note right">Contigo,<br>para siempre</div>
       </div>
 
       <div class="flap"></div>
-      <div class="seal">H&A</div>
+      <div class="seal" id="selloSobre"></div>
     </div>
   </div>
 
+<script src="datos-boda.js"></script>
 <script>
+  if (typeof datosBoda !== 'undefined') {
+    const { pareja, fotos } = datosBoda;
+    const fotoSobre = document.getElementById('fotoSobre');
+    document.title = pareja.novio + ' & ' + pareja.novia;
+    document.getElementById('selloSobre').textContent = pareja.novio.trim()[0] + '&' + pareja.novia.trim()[0];
+    fotoSobre.alt = pareja.novio + ' y ' + pareja.novia;
+    fotoSobre.src = fotos.sobre || fotos.portada;
+  }
+
   const envelope = document.getElementById('envelope');
   const stage = document.getElementById('stage');
   let opened = false;
