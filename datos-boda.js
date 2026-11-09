@@ -15,14 +15,18 @@ const datosBoda = {
   ceremonia: {
     fecha: "2026-12-12",
     hora: "16:00",
-    lugar: "Iglesia Catedral San Bartolomé de Huacho",
+    lugar: "El Bosque Eventos y Restaurante",
     ciudad: "Huacho",
-    pais: "Perú",
-    mapa: "https://maps.app.goo.gl/BSQ5Chv2vWie54PMA"
+    pais: "Perú"
+  },
+
+  mapa: {
+    nombre: "El Bosque Eventos y Restaurante",
+    localidad: "Huacho, Perú",
+    placeId: "ChIJS-eMYmUhB5ERE_HvpZEHDWQ"
   },
 
   itinerario: {
-    // La hora de la ceremonia se toma del bloque anterior.
     ceremonia: { nombre: "Ceremonia" },
     recepcion: { hora: "18:00", nombre: "Se casan p" },
     cena: { hora: "20:00", nombre: "Cena" },

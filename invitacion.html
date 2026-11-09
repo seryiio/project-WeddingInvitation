@@ -496,7 +496,6 @@
       font-style: italic;
     }
 
-    .map-btn,
     .rsvp-btn {
       display: inline-flex;
       align-items: center;
@@ -510,17 +509,10 @@
       text-decoration: none;
     }
 
-    .map-btn {
-      border-radius: 0.55rem;
-      margin-top: 0.65rem;
-    }
-
-    .map-btn:hover,
     .rsvp-btn:hover {
       filter: brightness(0.9);
     }
 
-    .map-btn .icon,
     .rsvp-btn .icon {
       color: inherit;
     }
@@ -1396,11 +1388,53 @@
       font-size: clamp(1.65rem, 4vw, 2.35rem);
     }
 
-    .info-venue .map-btn {
-      min-width: min(100%, 12.5rem);
-      margin-top: 0.85rem;
-      border-radius: 999px;
-      font-size: 1.05rem;
+    .venue-map {
+      margin: 0.85rem auto 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: var(--paper);
+      box-shadow: 0 0.45rem 1rem rgb(66 43 30 / 12%);
+    }
+
+    .venue-map-caption {
+      padding: 0.5rem 0.85rem;
+      color: var(--title);
+      font-weight: 600;
+    }
+
+    .venue-map iframe {
+      display: block;
+      width: 100%;
+      height: clamp(12rem, 24vw, 15rem);
+      border: 0;
+      background: #eee7de;
+    }
+
+    .venue-map-link {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 3rem;
+      padding: 0.55rem 0.85rem;
+      border-top: 1px solid var(--line);
+      color: var(--title);
+      text-align: left;
+      text-decoration: none;
+    }
+
+    .venue-map-link:hover { background: #f3e9dc; }
+    .venue-map-link:focus-visible { outline-offset: -3px; }
+
+    .venue-map-link::after {
+      content: "";
+      flex: 0 0 auto;
+      width: 0.45rem;
+      height: 0.45rem;
+      margin-inline-start: auto;
+      border: solid currentColor;
+      border-width: 1.5px 1.5px 0 0;
+      transform: rotate(45deg);
     }
 
     @media (max-width: 42rem) {
@@ -1936,15 +1970,20 @@
           <div class="info-item info-venue">
             <h3><svg class="icon" aria-hidden="true">
                 <use href="#i-pin" />
-              </svg> Lugar</h3>
+              </svg> Lugar de la ceremonia</h3>
             <p id="ceremony-location" data-boda="lugar"></p>
             <p class="note" data-boda="ciudadPais"></p>
-            <a class="map-btn" id="mapaCeremonia" target="_blank" rel="noopener">
-              <svg class="icon" aria-hidden="true">
-                <use href="#i-map" />
-              </svg>
-              Cómo llegar
-            </a>
+            <div class="venue-map">
+              <p class="venue-map-caption" data-boda="destinoMapa"></p>
+              <iframe id="vistaMapa" title="Mapa del destino" loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <a class="venue-map-link" id="rutaMapa">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-map" />
+                </svg>
+                Abrir ruta en Google Maps
+              </a>
+            </div>
           </div>
           <svg class="paper-flow flip" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
             <use href="#art-paper-flow" />
@@ -2095,7 +2134,7 @@
 
   <script src="datos-boda.js"></script>
   <script>
-    const { pareja, familia, ceremonia, itinerario, vestimenta, confirmacion, regalos, musica, fotos, textos } = datosBoda;
+    const { pareja, familia, ceremonia, mapa, itinerario, vestimenta, confirmacion, regalos, musica, fotos, textos } = datosBoda;
     const nombresPareja = pareja.novio + ' y ' + pareja.novia;
     const weddingDateTime = ceremonia.fecha + 'T' + ceremonia.hora + ':00-05:00';
     const weddingDate = new Date(weddingDateTime);
@@ -2145,6 +2184,7 @@
       notaCeremonia: 'Ceremonia a las ' + horaCeremonia,
       lugar: ceremonia.lugar,
       ciudadPais: ceremonia.ciudad + ', ' + ceremonia.pais,
+      destinoMapa: mapa.nombre,
       hombres: vestimenta.hombres,
       mujeres: vestimenta.mujeres,
       notaVestimenta: vestimenta.nota,
@@ -2197,7 +2237,21 @@
       return 'https://wa.me/' + telefono + '?text=' + encodeURIComponent(mensaje);
     }
 
-    document.getElementById('mapaCeremonia').href = ceremonia.mapa;
+    const destinoMapa = mapa.nombre + ', ' + mapa.localidad;
+    const vistaMapa = new URL('https://www.google.com/maps');
+    vistaMapa.search = new URLSearchParams({ q: destinoMapa, z: '17', output: 'embed', hl: 'es' });
+    const marcoMapa = document.getElementById('vistaMapa');
+    marcoMapa.title = 'Mapa de ' + mapa.nombre;
+    marcoMapa.src = vistaMapa.href;
+
+    const rutaMapa = new URL('https://www.google.com/maps/dir/');
+    rutaMapa.search = new URLSearchParams({
+      api: '1',
+      destination: destinoMapa,
+      destination_place_id: mapa.placeId,
+      dir_action: 'navigate'
+    });
+    document.getElementById('rutaMapa').href = rutaMapa.href;
     document.getElementById('whatsappNovio').href = enlaceWhatsApp(confirmacion.whatsappNovio, pareja.novio);
     document.getElementById('whatsappNovia').href = enlaceWhatsApp(confirmacion.whatsappNovia, pareja.novia);
     if (!confirmacion.soloAdultos) document.getElementById('avisoAdultos').remove();
