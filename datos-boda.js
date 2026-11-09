@@ -13,7 +13,7 @@ const datosBoda = {
   },
 
   ceremonia: {
-    fecha: "2026-12-12",
+    fecha: "2026-12-13",
     hora: "16:00",
     lugar: "El Bosque Eventos y Restaurante",
     ciudad: "Huacho",
@@ -42,8 +42,8 @@ const datosBoda = {
   confirmacion: {
     fechaLimite: "2026-11-15",
     // Números de WhatsApp con código de país, sin espacios ni el signo +.
-    whatsappNovio: "51904394806",
-    whatsappNovia: "51906980179",
+    whatsappNovio: "393285424769",
+    whatsappNovia: "51933439738",
     // {nombre} se sustituye por el nombre de la persona que recibe el mensaje.
     mensajeWhatsApp: "💍 ¡Hola {nombre}! Confirmo con mucho gusto mi asistencia a tu boda. 🥂✨ ¡Nos vemos en ese día tan especial! ❤️",
     soloAdultos: true,
