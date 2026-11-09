@@ -203,6 +203,13 @@
       margin: 0 0 2rem;
     }
 
+    .countdown-date {
+      display: block;
+      margin: -0.9rem 0 1.4rem;
+      font-size: 1.08rem;
+      color: var(--olive-dark);
+    }
+
     .countdown {
       display: flex;
       justify-content: center;
@@ -353,6 +360,53 @@
       width: 13px;
       height: 13px;
       fill: currentColor;
+    }
+
+    .dress-code {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem 2.2rem;
+      margin: 0.6rem 0;
+    }
+
+    .dress-code dd {
+      margin: 0;
+    }
+
+    .itinerary {
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 0.3rem 1.2rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .itinerary div {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 1.1rem;
+      padding: 0.7rem 0;
+      text-align: left;
+    }
+
+    .itinerary div + div {
+      border-top: 1px solid var(--line);
+    }
+
+    .itinerary dt {
+      color: var(--olive-dark);
+      font-weight: 600;
+    }
+
+    .itinerary dd {
+      margin: 0;
+    }
+
+    .gifts-account,
+    .adults-only {
+      margin-top: 1.2rem;
     }
 
     /* RSVP */
@@ -650,9 +704,33 @@
       </p>
     </section>
 
+    <section id="familia">
+      <div class="eyebrow reveal">Con el cariño de nuestras familias</div>
+      <h2 class="section-title reveal">Padres y padrinos</h2>
+      <div class="details-grid">
+        <div class="detail reveal">
+          <h3>Padres de la novia</h3>
+          <p>Ruth esther Nuñez Florian</p>
+          <p>Jorge Gonzalo Yarleque Gonzáles</p>
+        </div>
+        <div class="detail reveal">
+          <h3>Padres del novio</h3>
+          <p>Ingrid Margot esmir Leandro Briceño </p>
+          <p>Humberto Garro Prado</p>
+        </div>
+        <div class="detail reveal">
+          <h3>Padrinos de aros</h3>
+          <p>Deivid</p>
+        </div>
+      </div>
+    </section>
+
     <section id="contador">
       <div class="eyebrow reveal">Falta tan poco</div>
       <h2 class="section-title reveal">Cuenta regresiva</h2>
+      <time class="countdown-date reveal" id="wedding-date" datetime="2026-12-15T16:00:00-05:00">
+        Martes 15 de diciembre de 2026 · 4:00 p. m. (hora de Perú)
+      </time>
       <div class="countdown reveal-scale" id="countdown">
         <div class="unit"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
         <div class="unit"><span class="num" id="cd-hours">00</span><span class="label">Horas</span></div>
@@ -703,7 +781,7 @@
         <div class="detail reveal">
           <h3>Fecha</h3>
           <p>Martes 15 de diciembre de 2026</p>
-          <p class="note">Hora: 5:00 p.m. (por confirmar)</p>
+          <p class="note">Ceremonia a las 4:00 p. m.</p>
         </div>
         <div class="detail reveal">
           <h3>Lugar</h3>
@@ -719,9 +797,54 @@
         </div>
         <div class="detail reveal">
           <h3>Código de vestimenta</h3>
-          <p>Formal</p>
-          <p class="note">Colores sugeridos: ni idea mi loco — evitar blanco</p>
+          <dl class="dress-code">
+            <div>
+              <dt><strong>Hombres</strong></dt>
+              <dd>Formal</dd>
+            </div>
+            <div>
+              <dt><strong>Mujeres</strong></dt>
+              <dd>Formal</dd>
+            </div>
+          </dl>
+          <p class="note">Por favor, evita vestir de blanco.</p>
         </div>
+      </div>
+    </section>
+
+    <section id="itinerario">
+      <div class="eyebrow reveal">Hora de Perú</div>
+      <h2 class="section-title reveal">Itinerario</h2>
+      <dl class="itinerary reveal-scale">
+        <div>
+          <dt><time datetime="16:00">4:00 p. m.</time></dt>
+          <dd>Ceremonia</dd>
+        </div>
+        <div>
+          <dt><time datetime="18:00">6:00 p. m.</time></dt>
+          <dd>Recepción</dd>
+        </div>
+        <div>
+          <dt><time datetime="20:00">8:00 p. m.</time></dt>
+          <dd>Cena</dd>
+        </div>
+        <div>
+          <dt><time datetime="21:00">9:00 p. m.</time></dt>
+          <dd>Baile</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="regalos">
+      <h2 class="section-title reveal">Regalos</h2>
+      <p class="invite-text reveal">
+        Tu compañía es el mejor regalo. Si deseas tener un detalle con nosotros,
+        puedes hacerlo mediante una transferencia.
+      </p>
+      <div class="detail gifts-account reveal">
+        <h3>Cuenta BCP</h3>
+        <p>N° Cuenta: 33597718988063</p>
+        <p>CCI: 00233519771898806384</p>
       </div>
     </section>
 
@@ -731,6 +854,9 @@
       <p class="invite-text reveal">
         Te pedimos confirmar tu asistencia antes del 15 de noviembre de 2026,
         escribiéndonos por WhatsApp o llamada.
+      </p>
+      <p class="invite-text adults-only reveal">
+        La celebración será solo para adultos. Gracias por tu comprensión.
       </p>
       <div class="rsvp-buttons">
         <a class="rsvp-btn reveal"
@@ -750,8 +876,8 @@
   </div>
 
   <script>
-    // ---- Fecha de la boda: 15 de diciembre de 2026, 5:00 p.m. (ajustable) ----
-    const weddingDate = new Date('2026-12-15T17:00:00');
+    // ---- Fecha de la ceremonia en hora de Perú ----
+    const weddingDate = new Date(document.getElementById('wedding-date').dateTime);
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
