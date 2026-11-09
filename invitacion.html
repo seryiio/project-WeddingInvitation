@@ -12,865 +12,2097 @@
     rel="stylesheet">
   <style>
     :root {
-      --cream: #F5EFE4;
-      --paper: #FBF7EF;
-      --olive: #6B7355;
-      --olive-dark: #4E5540;
-      --rose: #C48B85;
-      --ink: #3A332C;
-      --gold: #B08D57;
-      --line: rgba(58, 51, 44, 0.18);
+      color-scheme: light;
+      --paper: #fbf6ef;
+      --ink: #432d21;
+      --title: #5a3825;
+      --muted: #76553e;
+      --gold: #98693f;
+      --line: #dfcab6;
+      --radius: 1.25rem;
+      --serif: "EB Garamond", Georgia, serif;
+      --display: "Cormorant Garamond", Georgia, serif;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      background: var(--cream);
+      background: #eadaca;
       color: var(--ink);
-      font-family: 'EB Garamond', serif;
-      line-height: 1.6;
+      font: 1.125rem/1.35 var(--serif);
     }
 
-    .bg-texture {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image:
-        radial-gradient(circle at 10% 10%, rgba(107, 115, 85, 0.08) 0, transparent 40%),
-        radial-gradient(circle at 90% 15%, rgba(196, 139, 133, 0.10) 0, transparent 45%),
-        radial-gradient(circle at 20% 90%, rgba(176, 141, 87, 0.08) 0, transparent 40%),
-        repeating-linear-gradient(45deg, rgba(58, 51, 44, 0.02) 0 2px, transparent 2px 26px);
+    h1,
+    h2,
+    h3,
+    p,
+    dl,
+    dd {
+      margin: 0;
     }
 
-    .container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    button,
+    input {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--title);
+      outline-offset: 4px;
+    }
+
+    .symbols {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .icon {
+      width: 1.45em;
+      height: 1.45em;
+      flex: none;
+      color: var(--gold);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: middle;
+    }
+
+    .page {
+      max-width: 76rem;
+      margin-inline: auto;
+      background: radial-gradient(ellipse at 0 65%, #f6ecdf80, transparent 50%), var(--paper);
+      box-shadow: 0 0 4rem #70432119;
+      overflow: clip;
     }
 
     section {
-      padding: 4.5rem 0;
-      border-bottom: 1px solid var(--line);
-      text-align: center;
-    }
-
-    section:last-of-type {
-      border-bottom: none;
-    }
-
-    .eyebrow {
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      font-size: 0.68rem;
-      color: var(--olive);
-    }
-
-    /* HERO con foto de fondo */
-    .hero {
       position: relative;
-      padding: 0;
-      margin: 0 -1.5rem;
-      min-height: 92vh;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      padding: clamp(1.6rem, 4vw, 2.8rem) clamp(0.9rem, 6vw, 5rem);
       text-align: center;
-      overflow: hidden;
-      background: linear-gradient(155deg, var(--olive) 0%, var(--rose) 100%);
-      border-bottom: none;
     }
 
-    .hero-photo {
+    .spray {
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+      width: clamp(5rem, 15%, 11rem);
+      height: auto;
+      aspect-ratio: 1;
+    }
+
+    .spray.top {
+      top: 0;
+      left: 0;
+      transform: rotate(180deg);
+    }
+
+    .spray.left {
+      bottom: 0;
+      left: 0;
+      transform: scaleX(-1);
+    }
+
+    .spray.right {
+      bottom: 0;
+      right: 0;
+    }
+
+    .section-heading {
+      margin-bottom: clamp(0.9rem, 2.7vw, 1.55rem);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.3rem, 1.6vw, 0.9rem);
+      color: var(--title);
+      font: 600 clamp(1.8rem, 4.5vw, 3.1rem)/0.98 var(--display);
+      text-wrap: balance;
+    }
+
+    .sprig {
+      flex: 0 0 auto;
+      width: clamp(1.45rem, 6vw, 3.8rem);
+      height: auto;
+      aspect-ratio: 2;
+      color: #a58b58;
+    }
+
+    .sprig:first-child {
+      transform: scaleX(-1);
+    }
+
+    .subtitle {
+      margin-top: 0.38rem;
+      color: var(--muted);
+      font: 600 clamp(1.05rem, 2.5vw, 1.45rem)/1.15 var(--display);
+    }
+
+    .tag {
+      display: table;
+      margin: 0 auto 0.45rem;
+      padding: 0.1rem 0.85rem;
+      border: 1px solid #b68b60;
+      border-radius: 999px;
+      color: var(--muted);
+      background: #faf1e7;
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 52% 48%;
+      align-items: center;
+      min-height: clamp(25rem, 61vw, 41rem);
+      padding: 0;
+      isolation: isolate;
+      background: #ead6bd;
+    }
+
+    .hero-photo,
+    .hero::before {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      z-index: -2;
+    }
+
+    .hero-photo {
       object-fit: cover;
-      object-position: center 30%;
+      object-position: center top;
     }
 
-    .hero-fallback-label {
-      position: absolute;
-      top: 1.4rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(251, 247, 239, 0.85);
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      z-index: 1;
-    }
-
-    .hero::after {
+    .hero::before {
       content: "";
+      z-index: -1;
+      background: linear-gradient(90deg, transparent 44%, #faf0e1a8 62%, #faf0e1ec 82%, #faf0e1d9);
+    }
+
+    .hero-content {
+      grid-column: 2;
+      padding: 1.4rem clamp(1.15rem, 4vw, 4rem) 4rem 0.85rem;
+    }
+
+    .hero-flourish {
+      width: 7.5rem;
+      height: 2.1rem;
+      color: var(--gold);
+    }
+
+    .eyebrow {
+      color: var(--title);
+      font: italic 600 clamp(1.3rem, 3.1vw, 2rem)/1.05 var(--display);
+    }
+
+    .names-line {
+      margin-block: 0.45rem;
+      color: var(--title);
+      font: italic 600 clamp(2.75rem, 6.8vw, 6.05rem)/0.88 var(--display);
+    }
+
+    .names-line>span {
+      display: block;
+    }
+
+    .date-line {
+      font-size: clamp(1.03rem, 2vw, 1.3rem);
+      font-weight: 500;
+    }
+
+    .invite-text {
+      max-width: 34rem;
+      margin-inline: auto;
+      text-wrap: pretty;
+    }
+
+    .hero .invite-text {
+      max-width: 24rem;
+      margin-top: 0.65rem;
+      font-size: clamp(0.98rem, 1.8vw, 1.15rem);
+      line-height: 1.22;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(0.6rem, 2vw, 1.05rem);
+    }
+
+    .family-card h3,
+    .info-item h3,
+    .gifts-account h3 {
+      color: var(--title);
+      font: 600 clamp(1.15rem, 2.3vw, 1.5rem)/1.05 var(--display);
+      margin-bottom: 0.5rem;
+    }
+
+    .family-card p+p {
+      margin-top: 0.22rem;
+    }
+
+    .family-card {
+      overflow-wrap: anywhere;
+    }
+
+    .countdown-date {
+      display: block;
+      max-width: 16rem;
+      margin: 0 auto 0.85rem;
+    }
+
+    .ceremony-date-text {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(58, 51, 44, 0.05) 0%, rgba(58, 51, 44, 0.25) 55%, rgba(58, 51, 44, 0.78) 100%);
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .ceremony-date-art {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 0.35rem clamp(0.35rem, 1.5vw, 0.8rem);
+      font: 500 clamp(0.78rem, 1.8vw, 1rem)/1 var(--serif);
+      text-transform: uppercase;
+    }
+
+    .ceremony-month {
+      grid-column: 1 / -1;
+      letter-spacing: 0.1em;
+    }
+
+    .ceremony-day {
+      color: var(--title);
+      font: 600 clamp(2.5rem, 6vw, 3.55rem)/0.9 var(--display);
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+
+    .ceremony-side {
+      display: grid;
+      place-items: center;
+      align-self: stretch;
+      min-height: 2.1rem;
+      padding-block: 0.25rem;
+      border-block: 1px solid var(--gold);
+    }
+
+    .ceremony-hour {
+      grid-column: 1 / -1;
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font: italic 400 1rem/1.2 var(--serif);
+      text-transform: none;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.35rem, 2vw, 1.05rem);
+      max-width: 34rem;
+      margin: 0 auto 0.8rem;
+    }
+
+    .unit {
+      padding: 0.12rem 0.1rem;
+    }
+
+    .num {
+      display: block;
+      color: var(--title);
+      font: 600 clamp(1.85rem, 5.4vw, 3.5rem)/0.94 var(--display);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .label {
+      font-size: clamp(0.9rem, 2.4vw, 1.16rem);
+    }
+
+    .today-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .calendar {
+      max-width: 19rem;
+      margin: 0.6rem auto 0;
+    }
+
+    .calendar summary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 2.5rem;
+      padding: 0.25rem 0.85rem;
+      border-radius: 999px;
+      background: #eee0d1;
+      cursor: pointer;
+      font-size: 0.98rem;
+    }
+
+    .calendar summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .calendar summary::after {
+      content: "⌄";
+      line-height: 1;
+    }
+
+    .calendar[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.1rem;
+      margin-top: 0.55rem;
+      padding: 0.55rem;
+      border: 1px solid var(--line);
+      border-radius: 0.85rem;
+      background: var(--paper);
+      font-size: 0.92rem;
+    }
+
+    .cal-grid .dow {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .cal-grid .day {
+      padding: 0.22rem 0;
+      border-radius: 0.4rem;
+    }
+
+    .cal-grid .empty {
+      visibility: hidden;
+    }
+
+    .cal-grid .wedding-day {
+      background: #915e46;
+      color: #fff9f2;
+      font-weight: 600;
+    }
+
+    .cal-grid .today {
+      outline: 1px solid var(--gold);
+      outline-offset: -1px;
+    }
+
+    .track-name {
+      color: var(--title);
+      font-weight: 600;
+      font-size: clamp(1.03rem, 2.4vw, 1.4rem);
+    }
+
+    .player-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: clamp(0.25rem, 2vw, 0.75rem);
+      align-items: center;
+      margin-top: 0.3rem;
+    }
+
+    .play-toggle,
+    .mute-toggle {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      color: var(--gold);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .play-toggle {
+      color: #fff9f2;
+      background: #87603c;
+    }
+
+    .play-toggle svg,
+    .mute-toggle svg {
+      grid-area: 1 / 1;
+      width: 1.35rem;
+      height: 1.35rem;
+      color: inherit;
+    }
+
+    .play-toggle svg {
+      fill: currentColor;
+    }
+
+    .play-toggle[disabled],
+    .mute-toggle[disabled] {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    .play-toggle .icon-pause,
+    .play-toggle.playing .icon-play,
+    .mute-toggle .icon-muted,
+    .mute-toggle.muted .icon-volume {
+      display: none;
+    }
+
+    .play-toggle.playing .icon-pause,
+    .mute-toggle.muted .icon-muted {
+      display: block;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 1.3rem;
+      margin: 0;
+      accent-color: #87603c;
+      cursor: pointer;
+    }
+
+    .progress-times {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .player-error {
+      margin: 0.65rem auto 0;
+      color: #793b2d;
+      font-size: 0.95rem;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.93rem;
+      font-style: italic;
+    }
+
+    .map-btn,
+    .rsvp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 2.75rem;
+      padding: 0.4rem 0.95rem;
+      background: #87603c;
+      color: #fff9f2;
+      font-size: 0.98rem;
+      text-decoration: none;
+    }
+
+    .map-btn {
+      border-radius: 0.55rem;
+      margin-top: 0.65rem;
+    }
+
+    .map-btn:hover,
+    .rsvp-btn:hover {
+      filter: brightness(0.9);
+    }
+
+    .map-btn .icon,
+    .rsvp-btn .icon {
+      color: inherit;
+    }
+
+    .dress-code {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin-block: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .dress-code div+div {
+      border-left: 1px solid var(--line);
+      padding-left: 0.55rem;
+    }
+
+    #itinerario {
+      isolation: isolate;
+    }
+
+    .itinerary {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 53rem;
+      margin: 0 auto;
+    }
+
+    .itinerary div {
+      position: relative;
+    }
+
+    .itinerary time {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .event-icon {
+      display: grid;
+      place-items: center;
+    }
+
+    .gift-layout {
+      display: grid;
+      grid-template-columns: 30% minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(0.75rem, 3.5vw, 2.25rem);
+      padding-block: clamp(1rem, 3vw, 1.8rem);
+    }
+
+    .gift-art {
+      width: 100%;
+      max-width: 15rem;
+      height: auto;
+      justify-self: center;
+    }
+
+    .gifts-account {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0.65rem auto 0;
+      padding: 0.65rem clamp(0.55rem, 3vw, 1.6rem);
+      border-radius: 0.85rem;
+      background: #eee0d1;
+      text-align: left;
+      overflow-wrap: anywhere;
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .gifts-account .icon {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .gifts-account h3 {
+      margin-bottom: 0.15rem;
+    }
+
+    .adults-only {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      width: fit-content;
+      margin: 0.75rem auto 0;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.6rem;
+      background: #f2e1cd;
+      font-style: italic;
+      font-size: 0.98rem;
+    }
+
+    .rsvp-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.2rem;
+      margin-top: 0.95rem;
+    }
+
+    .rsvp-btn {
+      min-width: 13rem;
+      border-radius: 999px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.35rem 1rem 1.6rem;
+      background: radial-gradient(ellipse at 20% 100%, #e9d4c1, transparent 57%),
+        radial-gradient(ellipse at 85% 100%, #efded0, transparent 58%);
+    }
+
+    .monogram {
+      color: var(--title);
+      font: italic 600 2.65rem/1 var(--display);
+    }
+
+    .thanks {
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 42rem) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        background: var(--paper);
+      }
+
+      .hero-photo {
+        position: relative;
+        z-index: auto;
+        display: block;
+        height: auto;
+        aspect-ratio: 1.28;
+        object-position: 28% 30%;
+      }
+
+      .hero::before {
+        display: none;
+      }
+
+      .hero-content {
+        position: relative;
+        grid-column: 1;
+        padding: 0.75rem 1rem 1.8rem;
+        background: radial-gradient(ellipse at 50% 0%, #f2e2cf, var(--paper) 75%);
+      }
+
+      .hero-flourish {
+        width: 6rem;
+      }
+
+      .names-line {
+        font-size: clamp(3.45rem, 12vw, 5rem);
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gift-layout {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+
+      .gift-art {
+        max-width: 8rem;
+      }
+
+      .rsvp-btn {
+        width: min(100%, 17rem);
+        min-width: 0;
+      }
+
+      .spray {
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 24rem) {
+      .gifts-account .icon {
+        display: none;
+      }
+    }
+
+    .paper-flow {
+      position: absolute;
+      inset-inline: 0;
+      bottom: -1px;
+      width: 100%;
+      height: clamp(2rem, 9.5vw, 7rem);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .paper-flow.flip {
+      transform: scaleX(-1);
+    }
+
+    .hero .paper-flow {
+      z-index: 0;
+    }
+
+    .hero .spray {
       z-index: 1;
+      bottom: 2%;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      padding: 0 1.5rem 3.2rem;
-      color: var(--paper);
     }
 
-    .hero .eyebrow {
-      color: rgba(251, 247, 239, 0.85);
-    }
-
-    .hero .names-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin: 0.2rem 0;
+    .hero-flourish {
+      width: 4rem;
     }
 
     .hero .ampersand {
-      font-family: 'Mrs Saint Delafield', cursive;
-      font-size: 2.2rem;
-      color: #fff;
-      text-shadow: 0 4px 18px rgba(58, 51, 44, 0.5);
-      line-height: 1;
-      transform: translateY(2px);
+      display: inline;
+      font: inherit;
+      font-size: 0.63em;
     }
 
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: clamp(2.2rem, 7vw, 3.2rem);
-      margin: 0;
-      letter-spacing: 0.02em;
-      color: var(--paper);
-      text-shadow: 0 6px 24px rgba(58, 51, 44, 0.55);
-      line-height: 1;
+    .hero .hero-rule {
+      display: block;
+      width: 8rem;
+      height: 1.8rem;
+      margin: 1rem auto 0;
+      color: var(--gold);
     }
 
     .hero .date-line {
-      margin-top: 1.4rem;
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--paper);
-      opacity: 0.95;
+      margin-top: 1.15rem;
     }
 
-    .below-hero {
-      padding-top: 4.5rem;
+    .container>section {
+      isolation: isolate;
     }
 
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 1.6rem auto;
-      position: relative;
+    #familia {
+      padding-top: 0.65rem;
+      padding-bottom: clamp(2.5rem, 7vw, 5rem);
     }
 
-    .divider::before {
-      content: "✦";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--cream);
-      padding: 0 10px;
-      color: var(--gold);
-      font-size: 0.8rem;
+    #familia .details-grid {
+      gap: 0;
     }
 
-    .invite-text {
-      max-width: 460px;
-      margin: 0 auto;
-      font-size: 1.08rem;
-      color: var(--ink);
+    .family-card {
+      padding: 0.2rem clamp(0.6rem, 2.5vw, 1.5rem);
     }
 
-    /* CONTADOR */
-    h2.section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-style: italic;
-      font-size: 1.9rem;
-      margin: 0 0 2rem;
+    .family-card+.family-card {
+      border-left: 1px solid var(--line);
     }
 
-    .countdown-date {
-      display: block;
-      margin: -0.9rem 0 1.4rem;
-      font-size: 1.08rem;
-      color: var(--olive-dark);
+    .family-card .icon {
+      width: 2.15rem;
+      height: 2.15rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .family-card h3 {
+      margin-bottom: 0.45rem;
+    }
+
+    #contador {
+      padding-top: 0.75rem;
+      padding-bottom: clamp(2.5rem, 7vw, 4.8rem);
+      background: radial-gradient(ellipse at 50% 90%, #f4e9dc89, transparent 75%);
+    }
+
+    #contador .section-heading {
+      margin-bottom: 0.65rem;
     }
 
     .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 1.1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.8rem;
+      gap: 0;
+      max-width: 36rem;
     }
 
-    .countdown .unit {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      min-width: 76px;
-      padding: 1rem 0.6rem;
-      box-shadow: 0 8px 20px -14px rgba(58, 51, 44, 0.5);
+    .unit {
+      position: relative;
     }
 
-    .countdown .num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.1rem;
-      font-weight: 600;
-      color: var(--olive-dark);
-      display: block;
-      font-variant-numeric: tabular-nums;
+    .unit+.unit::before {
+      content: ":";
+      position: absolute;
+      top: 0.03em;
+      left: 0;
+      transform: translateX(-50%);
+      color: var(--gold);
+      font: 400 clamp(1.55rem, 4vw, 2.65rem)/1 var(--display);
     }
 
-    .countdown .label {
-      display: block;
-      margin-top: 0.3rem;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--olive);
+    .calendar summary {
+      background: transparent;
     }
 
-    .today-note {
-      font-size: 0.85rem;
-      font-style: italic;
-      color: var(--olive-dark);
-      opacity: 0.85;
+    .calendar summary:hover {
+      background: #eee0d180;
     }
 
-    /* CALENDARIO */
-    .calendar {
-      max-width: 320px;
-      margin: 0 auto;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 1.4rem 1.2rem 1.6rem;
-      box-shadow: 0 12px 30px -18px rgba(58, 51, 44, 0.5);
+    #musica {
+      padding-top: 0.65rem;
+      padding-bottom: clamp(2.6rem, 7.5vw, 5rem);
     }
 
-    .calendar .cal-month {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.2rem;
-      margin-bottom: 0.9rem;
-      color: var(--olive-dark);
-    }
-
-    .cal-grid {
+    .music-layout {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
-    }
-
-    .cal-grid .dow {
-      font-size: 0.6rem;
-      letter-spacing: 0.06em;
-      color: var(--olive);
-      text-transform: uppercase;
-      padding-bottom: 4px;
-    }
-
-    .cal-grid .day {
-      font-size: 0.82rem;
-      padding: 0.4rem 0;
-      border-radius: 50%;
-      color: var(--ink);
-    }
-
-    .cal-grid .day.empty {
-      visibility: hidden;
-    }
-
-    .cal-grid .day.wedding-day {
-      background: var(--rose);
-      color: var(--paper);
-      font-weight: 600;
-      box-shadow: 0 4px 10px -4px rgba(196, 139, 133, 0.7);
-    }
-
-    .cal-grid .day.today {
-      outline: 1.5px solid var(--gold);
-      outline-offset: -1.5px;
-      font-weight: 600;
-    }
-
-    /* DETALLES */
-    .details-grid {
-      display: grid;
-      gap: 2.2rem;
-      text-align: center;
-    }
-
-    .detail h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-style: italic;
-      font-size: 1.3rem;
-      margin: 0 0 0.4rem;
-      color: var(--olive-dark);
-    }
-
-    .detail p {
-      margin: 0.15rem 0;
-      color: var(--ink);
-    }
-
-    .detail .note {
-      font-size: 0.85rem;
-      opacity: 0.75;
-    }
-
-    .map-btn {
-      display: inline-flex;
+      grid-template-columns: clamp(9rem, 23vw, 15.5rem) minmax(0, 1fr);
+      grid-template-areas: "art heading" "art player";
       align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.7rem;
-      padding: 0.55rem 1.3rem;
-      border: 1px solid var(--olive-dark);
-      border-radius: 2px;
-      color: var(--olive-dark);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.65rem;
-      transition: background 0.3s ease, color 0.3s ease;
+      gap: 0.75rem clamp(0.8rem, 3vw, 2.1rem);
+      max-width: 62rem;
+      margin-inline: auto;
     }
 
-    .map-btn:hover {
-      background: var(--olive-dark);
-      color: var(--paper);
-    }
-
-    .map-btn svg {
-      width: 13px;
-      height: 13px;
-      fill: currentColor;
-    }
-
-    .dress-code {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.6rem 2.2rem;
-      margin: 0.6rem 0;
-    }
-
-    .dress-code dd {
-      margin: 0;
-    }
-
-    .itinerary {
-      max-width: 360px;
-      margin: 0 auto;
-      padding: 0.3rem 1.2rem;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-    }
-
-    .itinerary div {
-      display: grid;
-      grid-template-columns: max-content 1fr;
-      gap: 1.1rem;
-      padding: 0.7rem 0;
-      text-align: left;
-    }
-
-    .itinerary div + div {
-      border-top: 1px solid var(--line);
-    }
-
-    .itinerary dt {
-      color: var(--olive-dark);
-      font-weight: 600;
-    }
-
-    .itinerary dd {
-      margin: 0;
-    }
-
-    .gifts-account,
-    .adults-only {
-      margin-top: 1.2rem;
-    }
-
-    /* RSVP */
-    .rsvp-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      margin-top: 1.3rem;
-    }
-
-    .rsvp-btn {
-      display: inline-block;
-      padding: 0.85rem 1.9rem;
-      border: 1px solid var(--olive-dark);
-      border-radius: 2px;
-      color: var(--olive-dark);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.68rem;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    .rsvp-btn:hover {
-      background: var(--olive-dark);
-      color: var(--paper);
-    }
-
-    .rsvp-phone {
+    .song-polaroid {
+      grid-area: art;
       display: block;
-      margin-top: 0.9rem;
+      width: 100%;
+      aspect-ratio: 252 / 238;
+      height: auto;
+    }
+
+    .music-layout .section-heading {
+      grid-area: heading;
+      margin-bottom: 0;
+    }
+
+    .music-layout .section-title {
       font-style: italic;
-      color: var(--rose);
-      text-decoration: none;
-      font-size: 1rem;
     }
 
-    footer {
-      padding: 3rem 0 4rem;
-      text-align: center;
-    }
-
-    footer .monogram {
-      font-family: 'Mrs Saint Delafield', cursive;
-      font-size: 1.8rem;
-      color: var(--rose);
-    }
-
-    footer .thanks {
-      margin-top: 0.6rem;
-      font-size: 0.85rem;
-      color: var(--olive);
-      letter-spacing: 0.05em;
-    }
-
-    @media (max-width:420px) {
-      .countdown {
-        gap: 0.6rem;
-      }
-
-      .countdown .unit {
-        min-width: 64px;
-        padding: 0.8rem 0.4rem;
-      }
-    }
-
-    /* ---- animación al hacer scroll ---- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.9s cubic-bezier(.22, .85, .3, 1), transform 0.9s cubic-bezier(.22, .85, .3, 1);
-    }
-
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-scale {
-      opacity: 0;
-      transform: translateY(20px) scale(0.94);
-      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.22, .85, .3, 1);
-    }
-
-    .reveal-scale.in-view {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .details-grid .detail.reveal:nth-child(1) {
-      transition-delay: 0s;
-    }
-
-    .details-grid .detail.reveal:nth-child(2) {
-      transition-delay: 0.12s;
-    }
-
-    .details-grid .detail.reveal:nth-child(3) {
-      transition-delay: 0.24s;
-    }
-
-    .divider.reveal {
-      transition-delay: 0.05s;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      .reveal,
-      .reveal-scale {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-    }
-
-    /* ---- sección: reproductor de música ---- */
-    .player {
-      display: flex;
-      align-items: center;
-      gap: 1.1rem;
-      max-width: 420px;
-      margin: 0 auto;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 1.1rem 1.3rem;
-      box-shadow: 0 14px 32px -18px rgba(58, 51, 44, 0.5);
-    }
-
-    .play-toggle {
-      flex: none;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: var(--olive-dark);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .play-toggle:hover {
-      transform: scale(1.05);
-    }
-
-    .play-toggle:active {
-      transform: scale(0.94);
-    }
-
-    .play-toggle svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--paper);
-    }
-
-    .play-toggle .icon-pause {
-      display: none;
-    }
-
-    .play-toggle.playing .icon-play {
-      display: none;
-    }
-
-    .play-toggle.playing .icon-pause {
-      display: block;
-    }
-
-    .play-toggle[disabled] {
-      opacity: 0.5;
-      cursor: default;
-      transform: none;
-    }
-
-    .player-info {
-      flex: 1;
+    .music-layout .player {
+      grid-area: player;
       min-width: 0;
       text-align: left;
     }
 
-    .track-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--olive-dark);
-      margin-bottom: 0.55rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .progress-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .progress-time {
-      font-size: 0.68rem;
-      color: var(--olive);
-      font-variant-numeric: tabular-nums;
-      flex: none;
-      width: 2.4em;
-    }
-
-    .progress-time.dur {
-      text-align: right;
-    }
-
-    .progress-track {
-      flex: 1;
-      height: 5px;
-      background: rgba(107, 115, 85, 0.18);
-      border-radius: 4px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--rose), var(--gold));
-      border-radius: 4px;
-      transition: width 0.15s linear;
-    }
-
-    .progress-track::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0%;
-      width: 12px;
-      height: 12px;
-      background: var(--gold);
-      border: 2px solid var(--paper);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 1px 4px rgba(58, 51, 44, 0.4);
-      display: none;
+    .music-layout .player-controls {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: clamp(0.35rem, 1.8vw, 1rem);
+      margin-top: 0.45rem;
     }
 
     .player-note {
-      max-width: 420px;
-      margin: 0.9rem auto 0;
-      font-size: 0.78rem;
-      color: var(--olive-dark);
-      opacity: 0.85;
+      margin-top: 0.6rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.98rem;
+      font-style: italic;
     }
 
-    .player-error {
-      max-width: 420px;
-      margin: 0.9rem auto 0;
-      font-size: 0.8rem;
-      color: #9c5a4f;
-      background: rgba(196, 139, 133, 0.12);
-      border: 1px solid rgba(196, 139, 133, 0.35);
-      border-radius: 6px;
-      padding: 0.7rem 0.9rem;
+    .progress-track {
+      appearance: none;
+      background: transparent;
     }
 
-    .player-error a {
-      color: #9c5a4f;
+    .progress-track::-webkit-slider-runnable-track {
+      height: 2px;
+      border-radius: 1rem;
+      background: var(--line);
+    }
+
+    .progress-track::-moz-range-track {
+      height: 2px;
+      border-radius: 1rem;
+      background: var(--line);
+    }
+
+    .progress-track::-webkit-slider-thumb {
+      appearance: none;
+      width: 0.55rem;
+      height: 0.55rem;
+      margin-top: -0.25rem;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .progress-track::-moz-range-thumb {
+      width: 0.55rem;
+      height: 0.55rem;
+      border: 0;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    #itinerario {
+      padding-block: 0.9rem clamp(3.25rem, 7.5vw, 5rem);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 57rem;
+      margin-inline: auto;
+    }
+
+    .timeline-wave {
+      position: absolute;
+      inset: 2rem 0 auto;
+      width: 100%;
+      height: 3rem;
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    .timeline-wave circle {
+      fill: var(--paper);
+    }
+
+    .itinerary {
+      max-width: none;
+    }
+
+    .event-icon {
+      width: auto;
+      height: 2.2rem;
+      border: 0;
+      background: none;
+      margin-bottom: 2rem;
+    }
+
+    .event-icon .icon {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    #regalos {
+      padding-top: 0.8rem;
+      padding-bottom: clamp(2.5rem, 7vw, 4.5rem);
+    }
+
+    .gift-layout {
+      grid-template-columns: 34% minmax(0, 1fr);
+    }
+
+    .gift-art {
+      max-width: 20rem;
+    }
+
+    .gifts-account {
+      border-radius: 2rem;
+      background: #eee0d1a6;
+      padding: 0.75rem clamp(0.75rem, 4vw, 2.25rem);
+    }
+
+    #rsvp {
+      margin-top: 0;
+      padding-top: 0.6rem;
+    }
+
+    .adults-only {
+      background: transparent;
+      padding-inline: 0;
+    }
+
+    .rsvp-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      max-width: 39rem;
+      margin-inline: auto;
+    }
+
+    .rsvp-choice {
+      min-width: 0;
+    }
+
+    .rsvp-choice summary,
+    .calendar-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 2.8rem;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .rsvp-choice summary {
+      background: #87603c;
+      color: #fff9f2;
+    }
+
+    .rsvp-choice summary .icon {
+      color: inherit;
+    }
+
+    .rsvp-choice summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .calendar-btn {
+      color: var(--title);
+      background: var(--paper);
+    }
+
+    .calendar-btn[hidden] {
+      display: none;
+    }
+
+    .rsvp-choice summary:hover,
+    .calendar-btn:hover {
+      filter: brightness(0.94);
+    }
+
+    .rsvp-options {
+      display: grid;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .rsvp-options a {
+      min-width: 0;
+      background: none;
+      color: var(--title);
+      border: 1px solid var(--line);
+    }
+
+    footer {
+      position: relative;
+      isolation: isolate;
+      padding-bottom: clamp(2.35rem, 6vw, 4.7rem);
+      background: none;
+    }
+
+    footer .paper-flow {
+      max-height: clamp(2rem, 6vw, 5rem);
+    }
+
+    .footer-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+
+    .footer-mark::before,
+    .footer-mark::after {
+      content: "";
+      width: 4rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 42rem) {
+      .hero .hero-rule {
+        margin-top: 0.65rem;
+      }
+
+      .hero .spray {
+        opacity: 0.55;
+      }
+
+      .hero-content {
+        padding-bottom: 2.9rem;
+      }
+
+      #familia {
+        padding-top: 0.35rem;
+      }
+
+      #familia .details-grid {
+        max-width: 22rem;
+        margin-inline: auto;
+      }
+
+      .family-card {
+        padding: 0.8rem 0;
+      }
+
+      .family-card+.family-card {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .music-layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "heading" "art" "player";
+        gap: 0.6rem;
+        max-width: 26rem;
+      }
+
+      .song-polaroid {
+        width: clamp(8rem, 40vw, 12rem);
+        justify-self: center;
+      }
+
+      .music-layout .track-name {
+        text-align: center;
+      }
+
+      .dress-code {
+        gap: 0.2rem;
+        font-size: 0.9rem;
+      }
+
+      .dress-code div+div {
+        padding-left: 0.2rem;
+      }
+
+      .itinerary {
+        font-size: clamp(0.85rem, 3.6vw, 1.05rem);
+      }
+
+      .timeline-wave {
+        inset-block-start: 1.55rem;
+        height: 1.9rem;
+      }
+
+      .event-icon {
+        height: 1.6rem;
+        margin-bottom: 1.45rem;
+      }
+
+      .event-icon .icon {
+        width: 1.35rem;
+        height: 1.35rem;
+      }
+
+      .gift-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .gift-art {
+        max-width: 10rem;
+      }
+
+      .rsvp-buttons {
+        grid-template-columns: 1fr;
+        max-width: 19rem;
+      }
+
+      .rsvp-options .rsvp-btn {
+        width: 100%;
+      }
+    }
+
+    .film-reel {
+      max-width: 66rem;
+      margin: 0 auto;
+      padding: clamp(0.4rem, 2vw, 1.25rem) clamp(0.7rem, 4vw, 2rem) 0;
+    }
+
+    .film-paper {
+      position: relative;
+      padding: clamp(0.6rem, 1.6vw, 1rem) clamp(0.7rem, 2.4vw, 1.5rem);
+      isolation: isolate;
+      filter: drop-shadow(0 0.55rem 0.55rem #6b442323);
+    }
+
+    .film-paper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(165deg, #f1e1ce, #fff8ee 48%, #eddbca);
+      clip-path: polygon(0% 14%, 5% 5%, 10% 7%, 15% 2%, 22% 5%, 27% 0%, 33% 4%, 39% 1%,
+          45% 4%, 50% 1%, 58% 4%, 65% 0%, 72% 4%, 78% 2%, 86% 5%, 92% 2%, 97% 6%, 100% 14%,
+          99% 83%, 96% 92%, 91% 90%, 86% 96%, 81% 94%, 74% 100%, 69% 97%, 62% 99%, 56% 95%,
+          50% 99%, 44% 95%, 38% 100%, 31% 96%, 26% 99%, 20% 95%, 15% 97%, 9% 93%, 3% 95%, 0% 85%);
+    }
+
+    .film-tape {
+      position: absolute;
+      z-index: 1;
+      top: 0.2rem;
+      left: 9%;
+      width: clamp(3.3rem, 10vw, 6.75rem);
+      height: clamp(1.05rem, 3vw, 1.85rem);
+      pointer-events: none;
+      transform: rotate(-12deg);
+      background: linear-gradient(164deg, #e9cda7df, #caa67bc7);
+      clip-path: polygon(0 0, 100% 0, 97% 20%, 100% 40%, 97% 65%, 100% 100%,
+          0 100%, 4% 75%, 0 57%, 3% 34%);
+    }
+
+    .film-scroll {
+      overflow-x: auto;
+      scrollbar-color: #a9825d #f0e2d2;
+    }
+
+    .filmstrip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(0.22rem, 0.9vw, 0.55rem);
+      position: relative;
+      margin: 0;
+      padding: clamp(0.85rem, 2vw, 1.3rem) 0.55rem;
+      border-radius: 2.75% 2.75% 3% 3% / 12% 12% 11% 11%;
+      background: linear-gradient(100deg, #c39a73, #e6cbae 42%, #d4ad87 75%, #bf946d);
+      box-shadow: inset 0 0 0 1px #9e744f48;
+      list-style: none;
+    }
+
+    .filmstrip::before,
+    .filmstrip::after {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      right: 0.4rem;
+      height: clamp(0.48rem, 1.25vw, 0.79rem);
+      background: radial-gradient(ellipse 25% 49% at 50% 50%, #fff4e5 94%, transparent 100%) repeat-x left center / clamp(0.75rem, 2vw, 1.33rem) 100%;
+      pointer-events: none;
+    }
+
+    .filmstrip::before {
+      top: 0.14rem;
+    }
+
+    .filmstrip::after {
+      bottom: 0.14rem;
+    }
+
+    .film-frame {
+      aspect-ratio: 1.28;
+      overflow: hidden;
+      border: 1px solid #fff7e8;
+      border-radius: 0.22rem;
+      background: #ead1b4;
+    }
+
+    .film-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .film-frame:nth-child(1) img {
+      transform: scale(2.6);
+      transform-origin: 34% 4%;
+    }
+
+    .film-frame:nth-child(2) img {
+      object-position: left center;
+    }
+
+    .film-frame:nth-child(3) img {
+      transform: scale(3.2);
+      transform-origin: 60% 75%;
+    }
+
+    .film-frame:nth-child(4) img {
+      transform: scale(1.7);
+      transform-origin: 43% 13%;
+    }
+
+    .film-hint {
+      display: none;
+    }
+
+    .invitation-message {
+      width: min(100% - 2rem, 39rem);
+      margin: clamp(0.9rem, 3vw, 1.85rem) auto clamp(0.75rem, 2.5vw, 1.45rem);
+      color: var(--title);
+      text-align: center;
+    }
+
+    .invitation-message .icon {
+      width: 1.35rem;
+      height: 1.35rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .invitation-message p {
+      font: italic 600 clamp(1.22rem, 2.55vw, 1.85rem)/1.22 var(--display);
+      text-wrap: balance;
+    }
+
+    #detalles {
+      padding-block: 0.65rem clamp(3rem, 8vw, 6rem);
+    }
+
+    #detalles .subtitle {
+      font-style: italic;
+    }
+
+    .info-spray-top {
+      top: 0;
+      right: 0;
+      transform: scaleY(-1);
+    }
+
+    .info-overview {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.8fr);
+      align-items: stretch;
+      gap: 0;
+      max-width: 65rem;
+      margin-inline: auto;
+    }
+
+    .info-item {
+      min-width: 0;
+      padding-inline: clamp(0.4rem, 2vw, 1.4rem);
+      overflow-wrap: anywhere;
+    }
+
+    .info-overview .info-item+.info-item {
+      border-left: 1px solid var(--line);
+    }
+
+    .info-item h3 {
+      display: grid;
+      justify-items: center;
+      gap: 0.45rem;
+    }
+
+    .info-item h3 .icon {
+      width: clamp(1.7rem, 4vw, 2.65rem);
+      height: clamp(1.7rem, 4vw, 2.65rem);
+    }
+
+    .info-item .note {
+      margin-top: 0.25rem;
+    }
+
+    .dress-code {
+      max-width: 18rem;
+      margin-inline: auto;
+    }
+
+    .dress-code div,
+    .dress-code div+div {
+      position: relative;
+      padding-inline-start: clamp(1.55rem, 3.9vw, 2.9rem);
+    }
+
+    .dress-code .icon {
+      position: absolute;
+      inset-inline-start: 0.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(1.4rem, 3.3vw, 2.3rem);
+      height: clamp(1.4rem, 3.3vw, 2.3rem);
+    }
+
+    .info-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.7rem, 2vw, 1.4rem);
+      margin: clamp(1.1rem, 3vw, 2rem) auto clamp(0.75rem, 2vw, 1.25rem);
+    }
+
+    .info-divider::before,
+    .info-divider::after {
+      content: "";
+      width: min(22%, 8.75rem);
+      border-top: 1px solid var(--line);
+    }
+
+    .info-venue {
+      max-width: 34rem;
+      margin-inline: auto;
+    }
+
+    .info-venue h3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
+    }
+
+    .info-venue .map-btn {
+      min-width: min(100%, 12.5rem);
+      margin-top: 0.85rem;
+      border-radius: 999px;
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 42rem) {
+      .film-scroll {
+        scroll-snap-type: x proximity;
+      }
+
+      .filmstrip {
+        grid-template-columns: repeat(4, clamp(8.5rem, 48vw, 12rem));
+        width: max-content;
+      }
+
+      .film-frame {
+        scroll-snap-align: center;
+      }
+
+      .film-hint {
+        display: block;
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 0.25rem;
+      }
+
+      .info-overview {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 23rem;
+      }
+
+      .info-overview .info-item {
+        padding-block: 0.75rem;
+      }
+
+      .info-overview .info-item+.info-item {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .dress-code {
+        gap: 0.4rem;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="bg-texture"></div>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="leaf-color" x2="1" y2="1">
+        <stop stop-color="#b0a475" />
+        <stop offset="1" stop-color="#7c8155" />
+      </linearGradient>
+      <radialGradient id="petal-color" cx=".42" cy=".38" r=".72">
+        <stop stop-color="#fff6e9" />
+        <stop offset=".62" stop-color="#f3d2bc" />
+        <stop offset="1" stop-color="#ca947e" />
+      </radialGradient>
+      <linearGradient id="gift-side" x2=".85" y2="1">
+        <stop stop-color="#f4dfc5" />
+        <stop offset="1" stop-color="#c69b77" />
+      </linearGradient>
+      <linearGradient id="ribbon-color" x2="1" y2="1">
+        <stop stop-color="#b18762" />
+        <stop offset=".45" stop-color="#ebccab" />
+        <stop offset="1" stop-color="#b78e69" />
+      </linearGradient>
+    </defs>
+    <symbol id="art-sprig" viewBox="0 0 92 46">
+      <path d="M4 38C25 30 47 30 86 9M23 32Q18 23 12 18M39 27Q38 14 32 8M52 23Q57 29 66 32M64 19Q65 10 74 4" fill="none"
+        stroke="currentColor" stroke-width="1.5" />
+      <g fill="currentColor">
+        <path
+          d="M21 30Q5 29 5 14Q16 18 21 30M28 32Q22 44 8 43Q16 34 28 32M38 25Q26 18 28 5Q38 11 38 25M45 25Q52 39 67 35Q61 27 45 25M51 22Q44 10 50 1Q57 10 51 22M63 19Q62 7 76 2Q74 13 63 19M66 19Q79 16 87 21Q79 28 66 19M76 13Q80 3 91 5Q87 12 76 13" />
+      </g>
+    </symbol>
+    <symbol id="art-flourish" viewBox="0 0 154 42">
+      <use href="#art-sprig" x="5" y="10" width="60" height="29" transform="translate(70 0) scale(-1 1)" />
+      <use href="#art-sprig" x="89" y="10" width="60" height="29" />
+      <path
+        d="M77 36C67 30 56 20 58 11C60 2 72 2 77 12C82 2 94 2 96 11C98 20 87 30 77 36ZM77 36Q54 43 33 29M77 36Q100 43 121 29"
+        fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+    </symbol>
+    <symbol id="art-rose" viewBox="0 0 80 80">
+      <g fill="url(#petal-color)" stroke="#c99880" stroke-width=".65">
+        <path
+          d="M15 60C4 52 2 44 8 37C5 25 17 14 26 16C29 5 45 4 51 12C65 7 77 17 71 29C82 39 77 54 69 57C69 68 54 77 43 71C32 80 17 72 15 60Z" />
+        <path
+          d="M19 58C8 50 15 39 24 33C17 23 27 15 38 20C45 12 60 17 62 28C74 35 69 50 61 54C57 70 37 72 31 64C25 66 20 62 19 58Z" />
+        <path d="M23 50C17 41 25 27 36 30C40 21 55 22 59 33C67 41 59 56 49 59C39 65 26 62 23 50Z" />
+        <path d="M33 54C23 49 27 38 34 36C40 29 50 31 55 38C62 46 49 57 41 56Z" />
+        <path d="M34 46C30 37 43 34 49 39C56 46 46 53 39 49C35 47 40 41 44 43" />
+      </g>
+    </symbol>
+    <symbol id="art-corner" viewBox="0 0 160 160">
+      <g fill="none" stroke="#929368" stroke-width="1.5">
+        <path d="M151 155Q98 117 11 151M149 151Q113 79 151 8M141 142Q102 99 62 95M149 137Q149 91 159 52" />
+      </g>
+      <g fill="url(#leaf-color)">
+        <path
+          d="M128 134Q99 121 87 139Q111 145 128 134M109 132Q101 111 81 110Q89 125 109 132M94 135Q68 128 58 147Q80 151 94 135M73 135Q65 117 44 120Q53 134 73 135M57 140Q32 132 22 150Q41 154 57 140M38 144Q21 133 8 141Q20 150 38 144M112 121Q91 102 79 109Q92 121 112 121M95 110Q93 94 70 91Q77 105 95 110M132 122Q118 93 136 80Q145 107 132 122M130 102Q111 92 112 74Q130 81 130 102M133 86Q133 64 153 58Q150 77 133 86M136 65Q118 52 124 35Q141 47 136 65M140 51Q142 28 157 25Q155 42 140 51M146 33Q136 18 149 8Q154 21 146 33M150 121Q143 105 158 88Q162 108 150 121M152 98Q146 84 158 69Q163 86 152 98" />
+      </g>
+      <use href="#art-rose" x="77" y="83" width="83" height="83" />
+      <use href="#art-rose" x="52" y="108" width="43" height="43" />
+      <use href="#art-rose" x="126" y="53" width="31" height="31" />
+    </symbol>
+    <symbol id="art-gift" viewBox="0 0 220 150">
+      <g color="#a39567">
+        <use href="#art-sprig" x="10" y="7" width="105" height="54" transform="rotate(20 70 35)" />
+        <use href="#art-sprig" x="0" y="45" width="103" height="52" transform="rotate(-8 57 64)" />
+        <use href="#art-sprig" x="21" y="92" width="84" height="42" transform="rotate(-27 57 115)" />
+      </g>
+      <ellipse cx="136" cy="133" rx="76" ry="10" fill="#99673c" opacity=".14" />
+      <path d="M64 68L133 32L201 65L132 103Z" fill="#f6e3cb" stroke="#d8b89c" />
+      <path d="M64 68L132 103V141L64 104Z" fill="url(#gift-side)" stroke="#d8b89c" />
+      <path d="M132 103L201 65V103L132 141Z" fill="#e2c19f" stroke="#d0aa88" />
+      <path d="M88 55L158 90V127L170 120V83L101 49ZM104 89L173 51L184 57L115 95V131L104 125Z"
+        fill="url(#ribbon-color)" />
+      <g fill="url(#ribbon-color)" stroke="#b18462">
+        <path d="M133 68C111 72 91 64 96 47C100 32 113 43 133 68ZM134 68C145 42 160 33 169 43C181 57 159 69 134 68Z" />
+        <path
+          d="M131 68C122 73 119 87 112 102L108 87L96 92C109 78 115 69 131 68ZM137 68C149 70 155 81 174 90L158 88L160 101C146 88 144 78 137 68Z" />
+        <ellipse cx="134" cy="68" rx="8" ry="6" />
+      </g>
+    </symbol>
+    <linearGradient id="flow-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#efe0cd" stop-opacity=".68" />
+      <stop offset="1" stop-color="#fbf6ef" stop-opacity="0" />
+    </linearGradient>
+    <g id="art-hero-wave">
+      <path fill="#fbf6ef" d="M0 101C227 64 440-31 687 51S978 143 1200 35V120H0Z" />
+      <path fill="none" stroke="#e0c4a6" stroke-width="1.25" d="M0 119C230 65 446-30 687 53S977 145 1200 35" />
+    </g>
+    <g id="art-paper-flow">
+      <path fill="url(#flow-fill)" d="M0 115C168 10 375 14 600 58S1019 131 1200 12V120H0Z" />
+      <path fill="none" stroke="#e0c4a6" stroke-width="1.2" d="M0 115C168 10 375 14 600 58S1019 131 1200 12" />
+      <path fill="none" stroke="#e8d5c0" stroke-width=".7" d="M0 120C164 22 378 22 603 66S1020 140 1200 25" />
+    </g>
+    <symbol id="art-song-polaroid" viewBox="0 0 252 238">
+      <defs>
+        <linearGradient id="song-sand" x1="0" x2=".9" y1="0" y2="1">
+          <stop stop-color="#e8c294" />
+          <stop offset=".6" stop-color="#c99661" />
+          <stop offset="1" stop-color="#a66f43" />
+        </linearGradient>
+        <linearGradient id="song-sea" x1="0" x2=".3" y1="0" y2="1">
+          <stop stop-color="#7f7d76" />
+          <stop offset="1" stop-color="#b8a695" />
+        </linearGradient>
+        <linearGradient id="song-paper" x2=".35" y2="1">
+          <stop stop-color="#f8ede0" />
+          <stop offset="1" stop-color="#fff9ec" />
+        </linearGradient>
+        <clipPath id="song-photo-window">
+          <rect x="59" y="50" width="145" height="140" rx="1" />
+        </clipPath>
+        <filter id="song-grain" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency=".56" numOctaves="3" seed="5" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <filter id="song-shadow" x="-20%" y="-20%" width="150%" height="150%">
+          <feDropShadow dx="1" dy="6" stdDeviation="4" flood-color="#795134" flood-opacity=".26" />
+        </filter>
+      </defs>
+      <g transform="rotate(-10 132 126)">
+        <path
+          d="M43 30 52 28 56 31 73 29 85 30 98 28 108 30 124 29 136 31 148 29 160 30 173 28 182 30 195 29 218 31 216 54 219 75 217 95 219 117 217 137 220 157 218 179 220 199 218 220 203 219 195 221 183 219 171 221 160 220 149 222 135 220 121 222 107 220 95 221 84 219 75 222 62 221 51 223 45 219 43 195 45 180 42 160 44 141 42 119 44 96 42 74 45 53Z"
+          fill="url(#song-paper)" stroke="#eadaca" filter="url(#song-shadow)" />
+        <g clip-path="url(#song-photo-window)">
+          <rect x="59" y="50" width="145" height="140" fill="url(#song-sand)" />
+          <path d="M59 49h145v39c-31-7-52-2-73 7-29 13-47 20-72 15Z" fill="url(#song-sea)" />
+          <path d="M57 107c30 6 52-7 78-16 29-10 51-12 71-6" fill="none" stroke="#795842" stroke-opacity=".38"
+            stroke-width="7" />
+          <path d="M57 104c25 5 50-6 77-16 25-9 50-12 72-5" fill="none" stroke="#fff0db" stroke-width="4" />
+          <path d="M56 94c20 6 39-10 54-8s27-15 40-12 27-9 55-1m-147 9c18 7 23-7 34-5s18-8 31-8 18-10 34-7 33-7 51 1"
+            fill="none" stroke="#f3e4d2" stroke-opacity=".72" stroke-width="1.5" />
+          <path d="M63 89l10 5 10-2 4-7 10 2 11-5 3-7m20 1 9 2 7-6 10 2 11-7 11 1 8-5 8 2" fill="none" stroke="#f6ebdb"
+            stroke-opacity=".66" stroke-width="1" />
+          <rect x="59" y="50" width="145" height="140" filter="url(#song-grain)" opacity=".25"
+            style="mix-blend-mode:multiply" />
+          <path
+            d="M134 169C119 160 88 145 92 130C96 118 116 118 131 133C141 114 166 111 174 125C183 141 151 162 134 169Z"
+            fill="none" stroke="#f2c999" stroke-width="4.2" transform="translate(0 1.8)" opacity=".65" />
+          <path
+            d="M134 169C119 160 88 145 92 130C96 118 116 118 131 133C141 114 166 111 174 125C183 141 151 162 134 169Z"
+            fill="none" stroke="#674a32" stroke-width="2.7" stroke-dasharray="2 1" stroke-linecap="round" />
+        </g>
+      </g>
+      <path
+        d="M20 79 26 73 25 70 33 66 31 62 38 61 37 58 95 19 98 24 104 23 103 29 110 29 109 34 115 37 112 42 116 45 48 100 44 98 40 101 36 95 31 96 31 90 25 89 26 84Z"
+        fill="#d7b48d" fill-opacity=".76" stroke="#d3b28c" stroke-opacity=".58" />
+      <path d="m26 78 74-55m-63 69 76-54M33 79l72-55" fill="none" stroke="#f7e6cd" stroke-opacity=".56"
+        stroke-width="1.3" />
+      <g stroke="#9c8e61" stroke-width="1.25" stroke-linecap="round" fill="none">
+        <path
+          d="M62 230Q40 198 10 184M51 215Q33 193 36 164M43 203Q23 188 20 160M34 199Q20 198 7 199M29 190Q21 172 7 168M47 206Q56 190 52 177M30 180Q32 168 28 155" />
+      </g>
+      <g fill="#fffae9" stroke="#d4c095" stroke-width=".65">
+        <circle cx="9" cy="184" r="3.8" />
+        <circle cx="9" cy="198" r="3" />
+        <circle cx="18" cy="161" r="3.1" />
+        <circle cx="23" cy="164" r="2.5" />
+        <circle cx="8" cy="168" r="2.8" />
+        <circle cx="27" cy="154" r="3.3" />
+        <circle cx="33" cy="159" r="2.6" />
+        <circle cx="36" cy="164" r="3.7" />
+        <circle cx="52" cy="177" r="3.8" />
+        <circle cx="57" cy="181" r="2.8" />
+        <circle cx="13" cy="178" r="2.6" />
+      </g>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m4 12 5 5L20 6" />
+    </symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24">
+      <path d="M12 21C9 18 3 13.6 3 8.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 9 1.6C21 13.6 15 18 12 21Z" />
+    </symbol>
+    <symbol id="art-hero-mark" viewBox="0 0 68 34">
+      <path
+        d="M7 28C20 31 44 28 52 15C62-3 39-2 39 10C39 14 44 15 47 12M34 28C20 27 9 19 11 9C13-2 26 1 25 9C24 12 22 13 19 12"
+        fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+    </symbol>
+    <symbol id="i-people" viewBox="0 0 24 24">
+      <circle cx="8" cy="6.5" r="3" />
+      <circle cx="17" cy="6.5" r="2.5" />
+      <path d="M2 21v-2.5a6 6 0 0 1 12 0V21Zm12 0h8v-2.5a5 5 0 0 0-6.5-4.8" />
+    </symbol>
+    <symbol id="i-rings" viewBox="0 0 24 24">
+      <circle cx="8.5" cy="13.5" r="6" />
+      <circle cx="15.5" cy="13.5" r="6" />
+      <path d="m13 4 2.5-2 2.5 2-2.5 3Z" />
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M7 3v4m10-4v4M3 10h18m-14 6 2 2 4-4" />
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z" />
+      <circle cx="12" cy="10" r="2" />
+    </symbol>
+    <symbol id="i-hanger" viewBox="0 0 24 24">
+      <path d="M10 6a2 2 0 1 1 3 1.7c-.6.4-1 1.1-1 2.3l9 6a1.5 1.5 0 0 1-1 3H4a1.5 1.5 0 0 1-1-3l9-6" />
+    </symbol>
+    <symbol id="i-suit" viewBox="0 0 24 24">
+      <path
+        d="m8 3-5 2.5L2 9v11h4v2h5l1-2 1 2h5v-2h4V9l-1-3.5L16 3H8Zm0 0L6.5 8 12 20l5.5-12L16 3m-7 1 3 3 3-3m-3 3-2 4m2-4 2 4" />
+    </symbol>
+    <symbol id="i-dress" viewBox="0 0 24 24">
+      <path d="M8 2v4m8-4v4M8 5c1 0 3 1 4 2 1-1 3-2 4-2l1 3-2 5c3 3 5 6 6 9-5 1-13 1-18 0 1-3 3-6 6-9L7 8l1-3Z" />
+    </symbol>
+    <symbol id="i-map" viewBox="0 0 24 24">
+      <path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2Zm6-2v16m6-14v16" />
+    </symbol>
+    <symbol id="i-glasses" viewBox="0 0 24 24">
+      <path
+        d="m5 5 5 1-1 5a2.8 2.8 0 0 1-5.5-1Zm14 0-5 1 1 5a2.8 2.8 0 0 0 5.5-1ZM6 13l-1 7m-2 0 5 1m10-8 1 7m-2 1 5-1M12 2v2" />
+    </symbol>
+    <symbol id="i-dinner" viewBox="0 0 24 24">
+      <path d="M2 19h20m-18-3a8 8 0 1 1 16 0ZM12 5V3" />
+    </symbol>
+    <symbol id="i-music" viewBox="0 0 24 24">
+      <path d="M9 18V6l11-3v12M9 7l11-3" />
+      <ellipse cx="6" cy="18.5" rx="3" ry="2.5" />
+      <ellipse cx="17" cy="15.5" rx="3" ry="2.5" />
+    </symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24">
+      <path d="m2 8 10-6 10 6ZM4 21h16M3 18h18M6 10v8m4-8v8m4-8v8m4-8v8" />
+    </symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24">
+      <path d="M4 16a9 9 0 1 1 4 4l-5 1Zm5-9-1 1c0 3 4 7 7 7l1-1-2-2-1 1c-1.5-.6-2.4-1.5-3-3l1-1Z" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="m8 5 11 7-11 7Z" />
+    </symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <path d="M7 5h3v14H7Zm7 0h3v14h-3Z" />
+    </symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24">
+      <path d="M3 9h4l5-4v14l-5-4H3Zm12-1a5 5 0 0 1 0 8m3-11a9 9 0 0 1 0 14" />
+    </symbol>
+    <symbol id="i-muted" viewBox="0 0 24 24">
+      <path d="M3 9h4l5-4v14l-5-4H3Zm13 0 5 6m0-6-5 6" />
+    </symbol>
+  </svg>
 
-  <div class="container">
 
-    <section class="hero">
-      <img class="hero-photo" src="https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg"
-        alt="Humberto y Alexandra" onerror="this.style.display='none';">
-      <div class="hero-content">
-        <div class="eyebrow">Nos casamos</div>
-        <div class="names-line">
-          <h1>Humberto</h1>
-          <span class="ampersand">&amp;</span>
-          <h1>Alexandra</h1>
-        </div>
-        <div class="date-line">15 de diciembre de 2026 · Huacho</div>
-      </div>
-    </section>
-
-    <section class="below-hero">
-      <div class="divider reveal"></div>
-      <p class="invite-text reveal">
-        Con el corazón lleno de alegría y la bendición de nuestras familias,
-        te invitamos a acompañarnos en el día en que uniremos nuestras vidas
-        para siempre. Tu presencia es el regalo que más deseamos.
-      </p>
-    </section>
-
-    <section id="familia">
-      <div class="eyebrow reveal">Con el cariño de nuestras familias</div>
-      <h2 class="section-title reveal">Padres y padrinos</h2>
-      <div class="details-grid">
-        <div class="detail reveal">
-          <h3>Padres de la novia</h3>
-          <p>Ruth esther Nuñez Florian</p>
-          <p>Jorge Gonzalo Yarleque Gonzáles</p>
-        </div>
-        <div class="detail reveal">
-          <h3>Padres del novio</h3>
-          <p>Ingrid Margot esmir Leandro Briceño </p>
-          <p>Humberto Garro Prado</p>
-        </div>
-        <div class="detail reveal">
-          <h3>Padrinos de aros</h3>
-          <p>Deivid</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contador">
-      <div class="eyebrow reveal">Falta tan poco</div>
-      <h2 class="section-title reveal">Cuenta regresiva</h2>
-      <time class="countdown-date reveal" id="wedding-date" datetime="2026-12-15T16:00:00-05:00">
-        Martes 15 de diciembre de 2026 · 4:00 p. m. (hora de Perú)
-      </time>
-      <div class="countdown reveal-scale" id="countdown">
-        <div class="unit"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
-        <div class="unit"><span class="num" id="cd-hours">00</span><span class="label">Horas</span></div>
-        <div class="unit"><span class="num" id="cd-mins">00</span><span class="label">Min</span></div>
-        <div class="unit"><span class="num" id="cd-secs">00</span><span class="label">Seg</span></div>
-      </div>
-      <p class="today-note reveal" id="today-note"></p>
-
-      <div class="calendar reveal-scale" style="margin-top:2.4rem;">
-        <div class="cal-month">Diciembre 2026</div>
-        <div class="cal-grid" id="cal-grid"></div>
-      </div>
-    </section>
-
-    <section id="musica">
-      <div class="eyebrow reveal">Nuestra canción</div>
-      <h2 class="section-title reveal">La banda sonora de esta historia</h2>
-      <div class="player reveal-scale" id="audioPlayer">
-        <button class="play-toggle" id="musicBtn" aria-label="Reproducir">
-          <svg class="icon-play" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z" />
+  <div class="page">
+    <main>
+      <section class="hero" aria-labelledby="nombres">
+        <img class="hero-photo" src="ImagenBoda.jpg" alt="Humberto y Alexandra" width="5861" height="3907">
+        <div class="hero-content">
+          <svg class="hero-flourish" aria-hidden="true">
+            <use href="#art-hero-mark" />
           </svg>
-          <svg class="icon-pause" viewBox="0 0 24 24">
-            <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+          <p class="eyebrow">Nos casamos</p>
+          <h1 class="names-line" id="nombres">
+            <span>Humberto <span class="ampersand">&amp;</span></span>
+            <span>Alexandra</span>
+          </h1>
+          <p class="date-line">15 de diciembre de 2026 · Huacho</p>
+          <p class="invite-text">
+            Con el corazón lleno de alegría y la bendición de nuestras familias,
+            te invitamos a acompañarnos en el día en que uniremos nuestras vidas
+            para siempre. Tu presencia es el regalo que más deseamos.
+          </p>
+          <svg class="hero-rule" aria-hidden="true">
+            <use href="#art-flourish" />
           </svg>
-        </button>
-        <div class="player-info">
-          <div class="track-name" id="trackName">Perfect — Ed Sheeran</div>
-          <div class="progress-row">
-            <span class="progress-time cur" id="curTime">0:00</span>
-            <div class="progress-track" id="progressTrack">
-              <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+          <use href="#art-hero-wave" />
+        </svg>
+        <svg class="spray right" aria-hidden="true">
+          <use href="#art-corner" />
+        </svg>
+      </section>
+
+      <div class="container">
+        <section class="film-reel" aria-label="Carrete de fotos">
+          <div class="film-paper">
+            <span class="film-tape" aria-hidden="true"></span>
+            <div class="film-scroll" tabindex="0" role="group" aria-label="Fotos de Humberto y Alexandra">
+              <ul class="filmstrip">
+                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Primer plano de Humberto y Alexandra"
+                    loading="lazy"></li>
+                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Humberto y Alexandra junto al lago"
+                    loading="lazy"></li>
+                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Detalle del ramo de novia" loading="lazy"></li>
+                <li class="film-frame"><img src="ImagenBoda.jpg" alt="Retrato de la pareja con el paisaje de fondo"
+                    loading="lazy"></li>
+              </ul>
             </div>
-            <span class="progress-time dur" id="durTime">0:00</span>
           </div>
+          <p class="film-hint">Desliza para ver las fotos</p>
+        </section>
+
+        <div class="invitation-message">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-heart" />
+          </svg>
+          <p>Será una alegría compartir con ustedes el día en que uniremos nuestras vidas.</p>
         </div>
-      </div>
-      <p class="player-note reveal">La canción que elegimos para acompañar nuestra historia</p>
-      <p class="player-error" id="playerError" style="display:none;"></p>
-      <audio id="audioEl" preload="metadata" loop
-        src="https://res.cloudinary.com/y3rmpmag/video/upload/v1784139873/Ed_Sheeran_-_Perfect_smjaps.mp3">
-      </audio>
-    </section>
-    <section id="detalles">
-      <div class="eyebrow reveal">Información</div>
-      <h2 class="section-title reveal">Detalles del gran día</h2>
-      <div class="details-grid">
-        <div class="detail reveal">
-          <h3>Fecha</h3>
-          <p>Martes 15 de diciembre de 2026</p>
-          <p class="note">Ceremonia a las 4:00 p. m.</p>
-        </div>
-        <div class="detail reveal">
-          <h3>Lugar</h3>
-          <p>Iglesia Catedral San Bartolomé de Huacho</p>
-          <p class="note">Huacho, Perú</p>
-          <a class="map-btn" href="https://maps.app.goo.gl/BSQ5Chv2vWie54PMA" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+
+        <section id="familia" aria-labelledby="familia-titulo">
+          <header class="section-heading">
+            <h2 class="section-title" id="familia-titulo">
+              <svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg><span>Con el cariño de nuestras familias</span><svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg>
+            </h2>
+            <p class="subtitle">Padres y padrinos</p>
+          </header>
+          <div class="details-grid">
+            <div class="family-card">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-people" />
+              </svg>
+              <h3>Padres de la novia</h3>
+              <p>Ruth esther Nuñez Florian</p>
+              <p>Jorge Gonzalo Yarleque Gonzáles</p>
+            </div>
+            <div class="family-card">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-people" />
+              </svg>
+              <h3>Padres del novio</h3>
+              <p>Ingrid Margot esmir Leandro Briceño </p>
+              <p>Humberto Garro Prado</p>
+            </div>
+            <div class="family-card">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-heart" />
+              </svg>
+              <h3>Padrinos de aros</h3>
+              <p>Deivid</p>
+            </div>
+          </div>
+          <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <use href="#art-paper-flow" />
+          </svg>
+        </section>
+
+        <section id="contador" aria-labelledby="contador-titulo">
+          <svg class="spray top" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <svg class="spray right" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <header class="section-heading">
+            <h2 class="section-title" id="contador-titulo">
+              <svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg><span>Falta tan poco</span><svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg>
+            </h2>
+            <p class="subtitle">Cuenta regresiva</p>
+          </header>
+          <time class="countdown-date" id="wedding-date" datetime="2026-12-15T16:00:00-05:00">
+            <span class="ceremony-date-text">Martes 15 de diciembre de 2026, a las 4:00 p. m. (hora de Perú)</span>
+            <span class="ceremony-date-art" aria-hidden="true">
+              <span class="ceremony-month">Diciembre</span>
+              <span class="ceremony-side">Martes</span>
+              <span class="ceremony-day">15</span>
+              <span class="ceremony-side">2026</span>
+              <span class="ceremony-hour">4:00 p. m. (hora de Perú)</span>
+            </span>
+          </time>
+          <div class="countdown" id="countdown">
+            <div class="unit"><span class="num" id="cd-days">00</span><span class="label">Días</span></div>
+            <div class="unit"><span class="num" id="cd-hours">00</span><span class="label">Horas</span></div>
+            <div class="unit"><span class="num" id="cd-mins">00</span><span class="label">Min</span></div>
+            <div class="unit"><span class="num" id="cd-secs">00</span><span class="label">Seg</span></div>
+          </div>
+          <p class="today-note" id="today-note"></p>
+
+          <details class="calendar">
+            <summary><svg class="icon" aria-hidden="true">
+                <use href="#i-calendar" />
+              </svg> Diciembre 2026</summary>
+            <div class="cal-grid" id="cal-grid"></div>
+          </details>
+          <svg class="paper-flow flip" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <use href="#art-paper-flow" />
+          </svg>
+        </section>
+
+        <section id="musica" aria-labelledby="musica-titulo">
+          <div class="music-layout">
+            <header class="section-heading">
+              <h2 class="section-title" id="musica-titulo">
+                <svg class="sprig" aria-hidden="true">
+                  <use href="#art-sprig" />
+                </svg><span>Nuestra canción</span><svg class="sprig" aria-hidden="true">
+                  <use href="#art-sprig" />
+                </svg>
+              </h2>
+              <p class="subtitle">La banda sonora de esta historia</p>
+            </header>
+            <svg class="song-polaroid" aria-hidden="true">
+              <use href="#art-song-polaroid" />
             </svg>
-            Cómo llegar
-          </a>
-        </div>
-        <div class="detail reveal">
-          <h3>Código de vestimenta</h3>
-          <dl class="dress-code">
-            <div>
-              <dt><strong>Hombres</strong></dt>
-              <dd>Formal</dd>
+            <div class="player" id="audioPlayer">
+              <p class="track-name" id="trackName">Te Amo - Umberto Tozzi</p>
+              <div class="player-controls">
+                <button class="play-toggle" id="musicBtn" type="button" aria-label="Reproducir">
+                  <svg class="icon icon-play" aria-hidden="true">
+                    <use href="#i-play" />
+                  </svg>
+                  <svg class="icon icon-pause" aria-hidden="true">
+                    <use href="#i-pause" />
+                  </svg>
+                </button>
+                <div>
+                  <input class="progress-track" id="progressTrack" type="range" min="0" max="1" step="0.1" value="0"
+                    aria-label="Posición de reproducción" disabled>
+                  <div class="progress-times" aria-hidden="true">
+                    <span id="curTime">0:00</span>
+                    <span id="durTime">0:00</span>
+                  </div>
+                </div>
+                <button class="mute-toggle" id="muteBtn" type="button" aria-label="Silenciar" aria-pressed="false">
+                  <svg class="icon icon-volume" aria-hidden="true">
+                    <use href="#i-volume" />
+                  </svg>
+                  <svg class="icon icon-muted" aria-hidden="true">
+                    <use href="#i-muted" />
+                  </svg>
+                </button>
+              </div>
+              <p class="player-note">La canción que elegimos para acompañar nuestra historia</p>
             </div>
-            <div>
-              <dt><strong>Mujeres</strong></dt>
-              <dd>Formal</dd>
+          </div>
+          <p class="player-error" id="playerError" role="status" hidden></p>
+          <audio id="audioEl" preload="metadata" loop src="Umberto Tozzi - Te Amo.mp3"></audio>
+          <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <use href="#art-paper-flow" />
+          </svg>
+        </section>
+
+        <section id="detalles" aria-labelledby="detalles-titulo">
+          <svg class="spray info-spray-top" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <svg class="spray left" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <header class="section-heading">
+            <h2 class="section-title" id="detalles-titulo">
+              <svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg><span>Información</span><svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg>
+            </h2>
+            <p class="subtitle">Detalles del gran día</p>
+          </header>
+          <div class="details-grid info-overview">
+            <div class="info-item">
+              <h3><svg class="icon" aria-hidden="true">
+                  <use href="#i-calendar" />
+                </svg> Fecha</h3>
+              <p>Martes 15 de diciembre de 2026</p>
+              <p class="note">Ceremonia a las 4:00 p. m.</p>
             </div>
-          </dl>
-          <p class="note">Por favor, evita vestir de blanco.</p>
-        </div>
-      </div>
-    </section>
+            <div class="info-item">
+              <h3><svg class="icon" aria-hidden="true">
+                  <use href="#i-hanger" />
+                </svg> Código de vestimenta</h3>
+              <dl class="dress-code">
+                <div>
+                  <dt><svg class="icon" aria-hidden="true">
+                      <use href="#i-suit" />
+                    </svg><strong>Hombres</strong></dt>
+                  <dd>Formal</dd>
+                </div>
+                <div>
+                  <dt><svg class="icon" aria-hidden="true">
+                      <use href="#i-dress" />
+                    </svg><strong>Mujeres</strong></dt>
+                  <dd>Formal</dd>
+                </div>
+              </dl>
+              <p class="note">Por favor, evita vestir de blanco y beige.</p>
+            </div>
+            <div class="info-item">
+              <h3><svg class="icon" aria-hidden="true">
+                  <use href="#i-glasses" />
+                </svg> Recepción</h3>
+              <p><time datetime="18:00">6:00 p. m.</time></p>
+            </div>
+          </div>
+          <div class="info-divider" aria-hidden="true">
+            <svg class="icon">
+              <use href="#i-heart" />
+            </svg>
+          </div>
+          <div class="info-item info-venue">
+            <h3><svg class="icon" aria-hidden="true">
+                <use href="#i-pin" />
+              </svg> Lugar</h3>
+            <p id="ceremony-location">Iglesia Catedral San Bartolomé de Huacho</p>
+            <p class="note">Huacho, Perú</p>
+            <a class="map-btn" href="https://maps.app.goo.gl/BSQ5Chv2vWie54PMA" target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-map" />
+              </svg>
+              Cómo llegar
+            </a>
+          </div>
+          <svg class="paper-flow flip" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <use href="#art-paper-flow" />
+          </svg>
+        </section>
 
-    <section id="itinerario">
-      <div class="eyebrow reveal">Hora de Perú</div>
-      <h2 class="section-title reveal">Itinerario</h2>
-      <dl class="itinerary reveal-scale">
-        <div>
-          <dt><time datetime="16:00">4:00 p. m.</time></dt>
-          <dd>Ceremonia</dd>
-        </div>
-        <div>
-          <dt><time datetime="18:00">6:00 p. m.</time></dt>
-          <dd>Recepción</dd>
-        </div>
-        <div>
-          <dt><time datetime="20:00">8:00 p. m.</time></dt>
-          <dd>Cena</dd>
-        </div>
-        <div>
-          <dt><time datetime="21:00">9:00 p. m.</time></dt>
-          <dd>Baile</dd>
-        </div>
-      </dl>
-    </section>
+        <section id="itinerario" aria-labelledby="itinerario-titulo">
+          <svg class="spray left" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <svg class="spray right" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <header class="section-heading">
+            <p class="tag">Hora de Perú</p>
+            <h2 class="section-title" id="itinerario-titulo">
+              <svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg><span>Itinerario</span><svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg>
+            </h2>
+          </header>
+          <div class="timeline">
+            <svg class="timeline-wave" viewBox="0 0 1000 48" preserveAspectRatio="none" aria-hidden="true">
+              <g fill="none" stroke="currentColor">
+                <path vector-effect="non-scaling-stroke"
+                  d="M0 43C35 22 69 24 125 24S284 11 375 11S540 32 625 32S811 18 875 18S970 17 1000 7" />
+                <circle cx="125" cy="24" r="5" />
+                <circle cx="375" cy="11" r="5" />
+                <circle cx="625" cy="32" r="5" />
+                <circle cx="875" cy="18" r="5" />
+              </g>
+            </svg>
+            <dl class="itinerary">
+              <div>
+                <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
+                      <use href="#i-rings" />
+                    </svg></span><time datetime="16:00">4:00 p. m.</time></dt>
+                <dd>Ceremonia</dd>
+              </div>
+              <div>
+                <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
+                      <use href="#i-glasses" />
+                    </svg></span><time datetime="18:00">6:00 p. m.</time></dt>
+                <dd>Se casan p</dd>
+              </div>
+              <div>
+                <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
+                      <use href="#i-dinner" />
+                    </svg></span><time datetime="20:00">8:00 p. m.</time></dt>
+                <dd>Cena</dd>
+              </div>
+              <div>
+                <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
+                      <use href="#i-music" />
+                    </svg></span><time datetime="21:00">9:00 p. m.</time></dt>
+                <dd>Bailetón</dd>
+              </div>
+            </dl>
+          </div>
+          <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <use href="#art-paper-flow" />
+          </svg>
+        </section>
 
-    <section id="regalos">
-      <h2 class="section-title reveal">Regalos</h2>
-      <p class="invite-text reveal">
-        Tu compañía es el mejor regalo. Si deseas tener un detalle con nosotros,
-        puedes hacerlo mediante una transferencia.
-      </p>
-      <div class="detail gifts-account reveal">
-        <h3>Cuenta BCP</h3>
-        <p>N° Cuenta: 33597718988063</p>
-        <p>CCI: 00233519771898806384</p>
-      </div>
-    </section>
+        <section id="regalos" class="gift-layout" aria-labelledby="regalos-titulo">
+          <svg class="gift-art" aria-hidden="true">
+            <use href="#art-gift" />
+          </svg>
+          <div>
+            <header class="section-heading">
+              <h2 class="section-title" id="regalos-titulo">
+                <svg class="sprig" aria-hidden="true">
+                  <use href="#art-sprig" />
+                </svg><span>Regalos</span><svg class="sprig" aria-hidden="true">
+                  <use href="#art-sprig" />
+                </svg>
+              </h2>
+            </header>
+            <p class="invite-text">
+              Tu compañía es el mejor regalo. Si deseas tener un detalle con nosotros,
+              puedes hacerlo mediante una transferencia.
+            </p>
+            <div class="gifts-account">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-bank" />
+              </svg>
+              <div>
+                <h3>Cuenta BCP</h3>
+                <p>N° Cuenta: 33597718988063</p>
+                <p>CCI: 00233519771898806384</p>
+              </div>
+            </div>
+          </div>
+          <svg class="paper-flow flip" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <use href="#art-paper-flow" />
+          </svg>
+        </section>
 
-    <section id="rsvp">
-      <div class="eyebrow reveal">Confírmanos</div>
-      <h2 class="section-title reveal">Cuenta con tu presencia</h2>
-      <p class="invite-text reveal">
-        Te pedimos confirmar tu asistencia antes del 15 de noviembre de 2026,
-        escribiéndonos por WhatsApp o llamada.
-      </p>
-      <p class="invite-text adults-only reveal">
-        La celebración será solo para adultos. Gracias por tu comprensión.
-      </p>
-      <div class="rsvp-buttons">
-        <a class="rsvp-btn reveal"
-          href="https://wa.me/51904394806?text=%F0%9F%92%8D%20%C2%A1Hola%20Humberto!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
-          target="_blank" rel="noopener">Confirmar con el novio</a>
-        <a class="rsvp-btn reveal"
-          href="https://wa.me/51906980179?text=%F0%9F%92%8D%20%C2%A1Hola%20Alexandra!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
-          target="_blank" rel="noopener">Confirmar con la novia</a>
+        <section id="rsvp" aria-labelledby="rsvp-titulo">
+          <svg class="spray left" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <svg class="spray right" aria-hidden="true">
+            <use href="#art-corner" />
+          </svg>
+          <header class="section-heading">
+            <h2 class="section-title" id="rsvp-titulo">
+              <svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg><span>Confirma tu asistencia</span><svg class="sprig" aria-hidden="true">
+                <use href="#art-sprig" />
+              </svg>
+            </h2>
+          </header>
+          <p class="invite-text">
+            Te pedimos confirmar tu asistencia antes del 15 de noviembre de 2026,
+            escribiéndonos por WhatsApp o llamada.
+          </p>
+          <p class="invite-text adults-only">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-people" />
+            </svg>
+            <span>La celebración será solo para adultos. Gracias por tu comprensión.</span>
+          </p>
+          <div class="rsvp-buttons">
+
+            <a class="rsvp-btn"
+              href="https://wa.me/51904394806?text=%F0%9F%92%8D%20%C2%A1Hola%20Humberto!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
+              target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
+                <use href="#i-whatsapp" />
+              </svg> Confirmar con el novio</a>
+            <a class="rsvp-btn"
+              href="https://wa.me/51906980179?text=%F0%9F%92%8D%20%C2%A1Hola%20Alexandra!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20tu%20boda.%20%F0%9F%A5%82%E2%9C%A8%20%C2%A1Nos%20vemos%20en%20ese%20d%C3%ADa%20tan%20especial!%20%E2%9D%A4%EF%B8%8F"
+              target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
+                <use href="#i-whatsapp" />
+              </svg> Confirmar con la novia</a>
+          </div>
+        </section>
+
       </div>
-    </section>
+    </main>
 
     <footer>
-      <div class="monogram reveal">H &amp; A</div>
-      <div class="thanks reveal">Gracias por ser parte de nuestra historia</div>
+      <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+        <use href="#art-paper-flow" />
+      </svg>
+      <div class="monogram footer-mark">H &amp; A</div>
+      <div class="thanks">Gracias por ser parte de nuestra historia</div>
     </footer>
 
   </div>
@@ -878,6 +2110,26 @@
   <script>
     // ---- Fecha de la ceremonia en hora de Perú ----
     const weddingDate = new Date(document.getElementById('wedding-date').dateTime);
+
+    const saveDate = document.getElementById('save-date');
+    const calendarTimestamp = date => date.toISOString().replace(/[-:]|\.\d{3}/g, '');
+    const ceremonyLocation = document.getElementById('ceremony-location').textContent.trim();
+    const calendarEvent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Humberto y Alexandra//Invitacion de boda//ES',
+      'BEGIN:VEVENT',
+      'UID:boda-humberto-y-alexandra-20261215@invitacion',
+      'DTSTAMP:' + calendarTimestamp(new Date()),
+      'DTSTART:' + calendarTimestamp(weddingDate),
+      'SUMMARY:Boda de Humberto y Alexandra',
+      'LOCATION:' + ceremonyLocation.replace(/[\\;,]/g, '\\$&').replace(/\r?\n/g, '\\n'),
+      'END:VEVENT',
+      'END:VCALENDAR',
+      ''
+    ].join('\r\n');
+    saveDate.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(calendarEvent);
+    saveDate.hidden = false;
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -952,71 +2204,78 @@
 
     buildCalendar();
 
-    // ---- Animación al hacer scroll ----
-    const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    // ---- Reproductor de música (audio directo, sin depender de terceros) ----
     const audio = document.getElementById('audioEl');
     const musicBtn = document.getElementById('musicBtn');
+    const muteBtn = document.getElementById('muteBtn');
     const curTimeEl = document.getElementById('curTime');
     const durTimeEl = document.getElementById('durTime');
-    const progressFill = document.getElementById('progressFill');
     const progressTrack = document.getElementById('progressTrack');
     const playerError = document.getElementById('playerError');
 
-    function fmtTime(sec) {
-      if (!isFinite(sec) || sec < 0) sec = 0;
-      const m = Math.floor(sec / 60);
-      const s = Math.floor(sec % 60);
-      return m + ':' + String(s).padStart(2, '0');
+    function fmtTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      return minutes + ':' + pad(Math.floor(seconds % 60));
     }
 
-    audio.addEventListener('loadedmetadata', () => {
+    function syncDuration() {
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
       durTimeEl.textContent = fmtTime(audio.duration);
-    });
+      progressTrack.max = audio.duration;
+      progressTrack.disabled = false;
+    }
 
+    function syncPlayback() {
+      musicBtn.classList.toggle('playing', !audio.paused);
+      musicBtn.setAttribute('aria-label', audio.paused ? 'Reproducir' : 'Pausar');
+    }
+
+    audio.addEventListener('loadedmetadata', syncDuration);
     audio.addEventListener('timeupdate', () => {
-      curTimeEl.textContent = fmtTime(audio.currentTime);
-      if (audio.duration > 0) {
-        progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
-      }
+      const time = fmtTime(audio.currentTime);
+      curTimeEl.textContent = time;
+      progressTrack.value = audio.currentTime;
+      progressTrack.setAttribute('aria-valuetext', time);
+    });
+    audio.addEventListener('play', syncPlayback);
+    audio.addEventListener('pause', syncPlayback);
+    audio.addEventListener('volumechange', () => {
+      muteBtn.classList.toggle('muted', audio.muted);
+      muteBtn.setAttribute('aria-pressed', String(audio.muted));
     });
 
-    audio.addEventListener('play', () => musicBtn.classList.add('playing'));
-    audio.addEventListener('pause', () => musicBtn.classList.remove('playing'));
+    function showAudioError(message) {
+      playerError.textContent = message;
+      playerError.hidden = false;
+    }
 
-    audio.addEventListener('error', () => {
-      playerError.textContent = 'No se pudo cargar la canción. Verifica que el enlace del audio siga disponible.';
-      playerError.style.display = 'block';
+    function handleAudioError() {
+      showAudioError('No se pudo cargar la canción.');
       musicBtn.disabled = true;
-    });
+      muteBtn.disabled = true;
+      progressTrack.disabled = true;
+    }
 
-    musicBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play().catch(() => {
-          playerError.textContent = 'El navegador bloqueó la reproducción automática. Intenta tocar el botón de nuevo.';
-          playerError.style.display = 'block';
-        });
-      } else {
+    audio.addEventListener('error', handleAudioError);
+    if (audio.error) handleAudioError();
+    syncDuration();
+
+    musicBtn.addEventListener('click', async () => {
+      if (!audio.paused) {
         audio.pause();
+        return;
+      }
+      try {
+        await audio.play();
+        playerError.hidden = true;
+      } catch (error) {
+        if (error.name !== 'AbortError' && !audio.error) {
+          showAudioError('No se pudo reproducir la canción. Intenta de nuevo.');
+        }
       }
     });
-
-    progressTrack.addEventListener('click', (e) => {
-      if (!audio.duration) return;
-      const rect = progressTrack.getBoundingClientRect();
-      const fraction = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = audio.duration * fraction;
+    muteBtn.addEventListener('click', () => { audio.muted = !audio.muted; });
+    progressTrack.addEventListener('input', () => {
+      audio.currentTime = progressTrack.valueAsNumber;
     });
   </script>
 </body>
