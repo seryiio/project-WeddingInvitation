@@ -27,10 +27,10 @@ const datosBoda = {
   },
 
   itinerario: {
+    recepcion: { hora: "15:30", nombre: "Recepción" },
     ceremonia: { nombre: "Ceremonia" },
-    recepcion: { hora: "18:00", nombre: "Se casan p" },
-    cena: { hora: "20:00", nombre: "Cena" },
-    baile: { hora: "21:00", nombre: "Bailetón" }
+    cena: { hora: "19:00", nombre: "Cena" },
+    baile: { hora: "21:00", nombre: "Baile" }
   },
 
   vestimenta: {
@@ -78,6 +78,7 @@ const datosBoda = {
 
   textos: {
     bienvenida: "Con el corazón lleno de alegría y la bendición de nuestras familias, te invitamos a acompañarnos en el día en que uniremos nuestras vidas para siempre. Tu presencia es el regalo que más deseamos.",
-    despuesDelCarrete: "Será una alegría compartir con ustedes el día en que uniremos nuestras vidas."
+    despuesDelCarrete: "Será una alegría compartir con ustedes el día en que uniremos nuestras vidas.",
+    cierreItinerario: "Y vivirán felices por siempre…"
   }
 };

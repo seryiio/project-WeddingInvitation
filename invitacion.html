@@ -918,6 +918,12 @@
       margin-inline: auto;
     }
 
+    .timeline-closing {
+      margin-top: clamp(1rem, 3vw, 1.5rem);
+      color: var(--title);
+      font: italic 600 clamp(1.15rem, 3vw, 1.65rem)/1.2 var(--display);
+    }
+
     .timeline-wave {
       position: absolute;
       inset: 2rem 0 auto;
@@ -2021,15 +2027,15 @@
             <dl class="itinerary">
               <div>
                 <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
-                      <use href="#i-rings" />
-                    </svg></span><time data-horario="ceremonia"></time></dt>
-                <dd data-boda="evento-ceremonia"></dd>
-              </div>
-              <div>
-                <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
                       <use href="#i-glasses" />
                     </svg></span><time data-horario="recepcion"></time></dt>
                 <dd data-boda="evento-recepcion"></dd>
+              </div>
+              <div>
+                <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
+                      <use href="#i-rings" />
+                    </svg></span><time data-horario="ceremonia"></time></dt>
+                <dd data-boda="evento-ceremonia"></dd>
               </div>
               <div>
                 <dt><span class="event-icon"><svg class="icon" aria-hidden="true">
@@ -2045,6 +2051,7 @@
               </div>
             </dl>
           </div>
+          <p class="timeline-closing" data-boda="cierreItinerario"></p>
           <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
             <use href="#art-paper-flow" />
           </svg>
@@ -2173,6 +2180,7 @@
       fechaPortada: fechaCivil(ceremonia.fecha, fechaLarga) + ' · ' + ceremonia.ciudad,
       bienvenida: textos.bienvenida,
       despuesDelCarrete: textos.despuesDelCarrete,
+      cierreItinerario: textos.cierreItinerario ?? '',
       fechaCompleta,
       fechaAccesible: fechaCompleta + ', a las ' + horaLocal,
       diaSemana,
