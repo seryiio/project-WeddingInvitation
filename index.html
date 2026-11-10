@@ -286,7 +286,7 @@
     const { pareja, fotos } = datosBoda;
     const fotoSobre = document.getElementById('fotoSobre');
     document.title = pareja.novio + ' & ' + pareja.novia;
-    document.getElementById('selloSobre').textContent = pareja.novia.trim()[0] + '&' + pareja.novio.trim()[0];
+    document.getElementById('selloSobre').textContent = pareja.novio.trim()[0] + '&' + pareja.novia.trim()[0];
     fotoSobre.alt = pareja.novio + ' y ' + pareja.novia;
     fotoSobre.src = fotos.sobre || fotos.portada;
   }
