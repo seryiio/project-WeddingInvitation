@@ -40,7 +40,7 @@ const datosBoda = {
   },
 
   confirmacion: {
-    fechaLimite: "2026-11-15",
+    fechaLimite: "2026-11-20",
     // Números de WhatsApp con código de país, sin espacios ni el signo +.
     whatsappNovio: "393285424769",
     whatsappNovia: "51933439738",
