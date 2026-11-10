@@ -2135,7 +2135,7 @@
   <script src="datos-boda.js"></script>
   <script>
     const { pareja, familia, ceremonia, mapa, itinerario, vestimenta, confirmacion, regalos, musica, fotos, textos } = datosBoda;
-    const nombresPareja = pareja.novio + ' y ' + pareja.novia;
+    const nombresPareja = pareja.novia + ' y ' + pareja.novio;
     const weddingDateTime = ceremonia.fecha + 'T' + ceremonia.hora + ':00-05:00';
     const weddingDate = new Date(weddingDateTime);
     document.getElementById('wedding-date').dateTime = weddingDateTime;
