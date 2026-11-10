@@ -2163,7 +2163,7 @@
     const mes = capitalizar(fechaCivil(ceremonia.fecha, { month: 'long' }));
     const anio = ceremonia.fecha.slice(0, 4);
     const horaCeremonia = mostrarHora(ceremonia.hora);
-    const horaLocal = horaCeremonia + ' (hora de Perú)';
+    const horaLocal = horaCeremonia;
     const horarios = {
       ...itinerario,
       ceremonia: { ...itinerario.ceremonia, hora: ceremonia.hora }
