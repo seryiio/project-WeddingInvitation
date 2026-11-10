@@ -7,7 +7,7 @@ const datosBoda = {
   },
 
   familia: {
-    padresDelNovio: ["Ingrid Margot esmir Leandro Briceño", "Humberto Garro Prado"],
+    padresDelNovio: ["Ingrid Margot Esmir Leandro Briceño", "Humberto Garro Prado"],
     padresDeLaNovia: ["Ruth esther Nuñez Florian", "Jorge Gonzalo Yarleque Gonzáles"],
     padrinosDeAros: ["Deivid"]
   },
