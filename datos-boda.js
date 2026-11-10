@@ -65,7 +65,7 @@ const datosBoda = {
 
   fotos: {
     sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg",
-    portada: "ImagenBoda.jpg",
+    portada: https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg",
     // Cuatro fotos en orden. Si archivo está vacío, se usa un recorte de la portada.
     // {pareja} se sustituye por los nombres de los novios.
     carrete: [
