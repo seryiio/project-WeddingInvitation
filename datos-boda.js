@@ -7,7 +7,7 @@ const datosBoda = {
   },
 
   familia: {
-    padresDelNovio: ["Ingrid Margot Esmir Leandro Briceño", "Humberto Garro Prado"],
+    padresDelNovio: ["Ingrid Margot esmir Leandro Briceño", "Humberto Garro Prado"],
     padresDeLaNovia: ["Ruth esther Nuñez Florian", "Jorge Gonzalo Yarleque Gonzáles"],
     padrinosDeAros: ["Deivid"]
   },
@@ -55,7 +55,7 @@ const datosBoda = {
     // Mantén las comillas para conservar los ceros iniciales.
     cuenta: "33597718988063",
     cci: "00233519771898806384",
-    mensaje: "Tu presencia hace que esté día sea inolvidable. Si te nace tener un gesto especial con nosotros, estos son los medios disponibles."
+    mensaje: "Tu compañía es el mejor regalo. Si deseas tener un detalle con nosotros, puedes hacerlo mediante una transferencia."
   },
 
   musica: {
