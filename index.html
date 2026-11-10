@@ -285,9 +285,9 @@
   if (typeof datosBoda !== 'undefined') {
     const { pareja, fotos } = datosBoda;
     const fotoSobre = document.getElementById('fotoSobre');
-    document.title = pareja.novia + ' & ' + pareja.novio;
+    document.title = pareja.novio + ' & ' + pareja.novia;
     document.getElementById('selloSobre').textContent = pareja.novia.trim()[0] + '&' + pareja.novio.trim()[0];
-    fotoSobre.alt = pareja.novia + ' y ' + pareja.novio;
+    fotoSobre.alt = pareja.novio + ' y ' + pareja.novia;
     fotoSobre.src = fotos.sobre || fotos.portada;
   }
 
