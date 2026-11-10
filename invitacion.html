@@ -236,7 +236,7 @@
 
     .details-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: clamp(0.6rem, 2vw, 1.05rem);
     }
 
@@ -1429,8 +1429,13 @@
       text-decoration: none;
     }
 
-    .venue-map-link:hover { background: #f3e9dc; }
-    .venue-map-link:focus-visible { outline-offset: -3px; }
+    .venue-map-link:hover {
+      background: #f3e9dc;
+    }
+
+    .venue-map-link:focus-visible {
+      outline-offset: -3px;
+    }
 
     .venue-map-link::after {
       content: "";
@@ -1737,8 +1742,8 @@
           </svg>
           <p class="eyebrow">Nos casamos</p>
           <h1 class="names-line" id="nombres">
-            <span><span data-boda="novio"></span> <span class="ampersand">&amp;</span></span>
-            <span data-boda="novia"></span>
+            <span><span data-boda="novia"></span> <span class="ampersand">&amp;</span></span>
+            <span data-boda="novio"></span>
           </h1>
           </h1>
           <p class="date-line" data-boda="fechaPortada"></p>
@@ -1787,7 +1792,7 @@
                 <use href="#art-sprig" />
               </svg>
             </h2>
-            <p class="subtitle">Padres y padrinos</p>
+            <p class="subtitle">Padres</p>
           </header>
           <div class="details-grid">
             <div class="family-card">
@@ -1803,13 +1808,6 @@
               </svg>
               <h3>Padres del novio</h3>
               <div id="padresDelNovio"></div>
-            </div>
-            <div class="family-card">
-              <svg class="icon" aria-hidden="true">
-                <use href="#i-heart" />
-              </svg>
-              <h3>Padrinos de aros</h3>
-              <div id="padrinosDeAros"></div>
             </div>
           </div>
           <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
@@ -2113,14 +2111,10 @@
           </p>
           <div class="rsvp-buttons">
 
-            <a class="rsvp-btn"
-              id="whatsappNovio"
-              target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
+            <a class="rsvp-btn" id="whatsappNovio" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
                 <use href="#i-whatsapp" />
               </svg> Confirmar con el novio</a>
-            <a class="rsvp-btn"
-              id="whatsappNovia"
-              target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
+            <a class="rsvp-btn" id="whatsappNovia" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true">
                 <use href="#i-whatsapp" />
               </svg> Confirmar con la novia</a>
           </div>
@@ -2204,7 +2198,7 @@
       plazoConfirmacion: 'Te pedimos confirmar tu asistencia antes del '
         + fechaCivil(confirmacion.fechaLimite, fechaLarga) + ', escribiéndonos por WhatsApp o llamada.',
       avisoAdultos: confirmacion.avisoAdultos,
-      monograma: pareja.novio.trim()[0] + ' & ' + pareja.novia.trim()[0]
+      monograma: pareja.novia.trim()[0] + ' & ' + pareja.novio.trim()[0]
     };
 
     for (const [clave, evento] of Object.entries(horarios)) {
@@ -2218,8 +2212,10 @@
       elemento.dateTime = hora;
       elemento.textContent = mostrarHora(hora);
     }
+
     for (const [grupo, nombres] of Object.entries(familia)) {
       const lista = document.getElementById(grupo);
+      if (!lista) continue;
       for (const nombre of nombres) {
         const parrafo = document.createElement('p');
         parrafo.textContent = nombre;
@@ -2227,7 +2223,7 @@
       }
     }
 
-    document.title = pareja.novio + ' & ' + pareja.novia + ' · '
+    document.title = pareja.novia + ' & ' + pareja.novio + ' · '
       + fechaCivil(ceremonia.fecha, { day: 'numeric', month: 'long' });
     const portada = document.querySelector('.hero-photo');
     portada.alt = nombresPareja;
