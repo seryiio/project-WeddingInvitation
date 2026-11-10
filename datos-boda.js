@@ -8,7 +8,7 @@ const datosBoda = {
 
   familia: {
     padresDelNovio: ["Ingrid Margot Esmir Leandro Briceño", "Humberto Garro Prado"],
-    padresDeLaNovia: ["Ruth esther Nuñez Florian", "Jorge Gonzalo Yarleque Gonzáles"],
+    padresDeLaNovia: ["Ruth Esther Nuñez Florian", "Jorge Gonzalo Yarleque Gonzáles"],
     padrinosDeAros: ["Deivid"]
   },
 
@@ -23,7 +23,7 @@ const datosBoda = {
   mapa: {
     nombre: "El Bosque Eventos y Restaurante",
     localidad: "Huacho, Perú",
-    placeId: "ChIJS-eMYmUhB5ERE_HvpZEHDWQ"
+    placeId: "c9xrRuHQFDshKUtu7"
   },
 
   itinerario: {

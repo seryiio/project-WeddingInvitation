@@ -2248,13 +2248,13 @@
     marcoMapa.title = 'Mapa de ' + mapa.nombre;
     marcoMapa.src = vistaMapa.href;
 
-    const rutaMapa = new URL('https://www.google.com/maps/dir/');
+    const rutaMapa = new URL('https://www.google.com/maps/search/');
+
     rutaMapa.search = new URLSearchParams({
       api: '1',
-      destination: destinoMapa,
-      destination_place_id: mapa.placeId,
-      dir_action: 'navigate'
-    });
+      query: destinoMapa,
+      ...(mapa.placeId ? { query_place_id: mapa.placeId } : {})
+    }).toString();
     document.getElementById('rutaMapa').href = rutaMapa.href;
     document.getElementById('whatsappNovio').href = enlaceWhatsApp(confirmacion.whatsappNovio, pareja.novio);
     document.getElementById('whatsappNovia').href = enlaceWhatsApp(confirmacion.whatsappNovia, pareja.novia);
