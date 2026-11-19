@@ -64,16 +64,19 @@ const datosBoda = {
   },
 
   fotos: {
-    sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg",
-    portada: "ImagenBoda.jpg",
-    // Cuatro fotos en orden. Si archivo está vacío, se usa un recorte de la portada.
+    sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg",
+    portada: "https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg",
+    // Cuatro fotos en orden. Las rutas se publican junto con la carpeta fotos.
     // {pareja} se sustituye por los nombres de los novios.
+    // posicion controla el encuadre de la miniatura. El visor muestra la foto completa.
     carrete: [
-      { archivo: "", descripcion: "Primer plano de {pareja}" },
-      { archivo: "", descripcion: "{pareja} junto al lago" },
-      { archivo: "", descripcion: "Detalle del ramo de novia" },
-      { archivo: "", descripcion: "Retrato de la pareja con el paisaje de fondo" }
-    ]
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg", descripcion: "", posicion: "50% 70%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/2_rl8dwq.jpg", descripcion: "", posicion: "50% 42%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/3_hwin8h.jpg", descripcion: "", posicion: "50% 55%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/4_wzdh2q.jpg", descripcion: "", posicion: "50% 45%" }
+    ],
+    // Foto que acompaña la frase final del itinerario. 0 es la primera del carrete.
+    destacada: 0
   },
 
   textos: {

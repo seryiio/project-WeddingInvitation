@@ -1488,6 +1488,108 @@
         gap: 0.4rem;
       }
     }
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .scroll-reveal.is-visible { opacity: 1; transform: none; }
+
+    .film-frame { aspect-ratio: 0.85; }
+    .photo-trigger {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      color: inherit;
+      background: transparent;
+      cursor: zoom-in;
+    }
+    .photo-trigger:focus-visible { outline-offset: -4px; }
+    .photo-trigger img { transition: filter 0.25s ease; }
+    .photo-trigger:hover img { filter: brightness(1.06); }
+    .couple-moment {
+      display: grid;
+      grid-template-columns: minmax(0, 13rem) minmax(0, 19rem);
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1rem, 4vw, 2.5rem);
+      margin: clamp(1.7rem, 5vw, 3rem) auto 0;
+    }
+    .couple-moment .photo-trigger {
+      height: auto;
+      padding: 0.5rem 0.5rem 1.2rem;
+      border: 1px solid var(--line);
+      border-radius: 0.2rem;
+      background: #fffaf2;
+      box-shadow: 0 0.6rem 1.6rem #53391d18;
+      transform: rotate(-3deg);
+    }
+    .couple-moment img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 70%;
+    }
+    .couple-moment .timeline-closing { margin: 0.6rem 0 0; text-wrap: balance; }
+    .moment-flourish { width: 5.5rem; height: 2rem; color: var(--gold); }
+
+    html.photo-viewer-open { overflow: hidden; }
+    .photo-viewer {
+      width: fit-content;
+      max-width: calc(100vw - 1.5rem);
+      max-height: 94vh;
+      max-height: 94dvh;
+      margin: auto;
+      padding: 3rem 1rem 1rem;
+      border: 1px solid #b08d5755;
+      border-radius: 0.9rem;
+      color: #fff8ee;
+      background: #30251e;
+      box-shadow: 0 1rem 5rem #0006;
+    }
+    .photo-viewer::backdrop { background: #1e1713d9; }
+    .photo-viewer figure { margin: 0; }
+    .photo-viewer img {
+      display: block;
+      max-width: min(80vw, 56rem);
+      max-height: 72vh;
+      max-height: 72dvh;
+      width: auto;
+      height: auto;
+      margin-inline: auto;
+      object-fit: contain;
+    }
+    .photo-viewer figcaption { margin-top: 0.65rem; max-width: 36rem; text-align: center; }
+    .photo-close {
+      position: absolute;
+      top: 0.25rem;
+      right: 0.25rem;
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: inherit;
+      font: 400 1.9rem/1 sans-serif;
+      cursor: pointer;
+    }
+    .photo-close:hover { background: #fff2; }
+    @media (max-width: 42rem) {
+      .couple-moment { grid-template-columns: 1fr; max-width: 16rem; gap: 1rem; }
+      .couple-moment .photo-trigger { max-width: 11rem; justify-self: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal, .scroll-reveal.is-visible { opacity: 1; transform: none; transition: none; }
+      .photo-trigger img { transition: none; }
+    }
+
   </style>
 </head>
 
@@ -1766,14 +1868,14 @@
             <span class="film-tape" aria-hidden="true"></span>
             <div class="film-scroll" tabindex="0" role="group" aria-label="Fotos de la pareja">
               <ul class="filmstrip">
-                <li class="film-frame"><img alt="" loading="lazy"></li>
-                <li class="film-frame"><img alt="" loading="lazy"></li>
-                <li class="film-frame"><img alt="" loading="lazy"></li>
-                <li class="film-frame"><img alt="" loading="lazy"></li>
+                <li class="film-frame"><button class="photo-trigger" type="button"><img alt="" loading="lazy"></button></li>
+                <li class="film-frame"><button class="photo-trigger" type="button"><img alt="" loading="lazy"></button></li>
+                <li class="film-frame"><button class="photo-trigger" type="button"><img alt="" loading="lazy"></button></li>
+                <li class="film-frame"><button class="photo-trigger" type="button"><img alt="" loading="lazy"></button></li>
               </ul>
             </div>
           </div>
-          <p class="film-hint">Desliza para ver las fotos</p>
+          <p class="film-hint">Desliza para ver las fotos · Toca para ampliar</p>
         </section>
 
         <div class="invitation-message">
@@ -2048,7 +2150,13 @@
               </div>
             </dl>
           </div>
-          <p class="timeline-closing" data-boda="cierreItinerario"></p>
+          <figure class="couple-moment">
+            <button class="photo-trigger" type="button"><img id="fotoDestacada" alt="" loading="lazy"></button>
+            <figcaption>
+              <svg class="moment-flourish" aria-hidden="true"><use href="#art-flourish" /></svg>
+              <p class="timeline-closing" data-boda="cierreItinerario"></p>
+            </figcaption>
+          </figure>
           <svg class="paper-flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
             <use href="#art-paper-flow" />
           </svg>
@@ -2131,6 +2239,14 @@
     </footer>
 
   </div>
+
+  <dialog class="photo-viewer" id="photo-viewer" aria-label="Foto ampliada">
+    <button class="photo-close" id="photo-close" type="button" aria-label="Cerrar foto" autofocus>×</button>
+    <figure>
+      <img id="photo-expanded" alt="">
+      <figcaption id="photo-caption"></figcaption>
+    </figure>
+  </dialog>
 
   <script src="datos-boda.js"></script>
   <script>
@@ -2233,7 +2349,13 @@
       imagen.alt = foto.descripcion.replaceAll('{pareja}', nombresPareja);
       imagen.toggleAttribute('data-recorte', !foto.archivo);
       imagen.src = foto.archivo || fotos.portada;
+      imagen.style.objectPosition = foto.posicion || 'center';
     });
+
+    const fotoDestacada = fotos.carrete[fotos.destacada ?? 0];
+    const imagenDestacada = document.getElementById('fotoDestacada');
+    imagenDestacada.src = fotoDestacada.archivo || fotos.portada;
+    imagenDestacada.alt = fotoDestacada.descripcion.replaceAll('{pareja}', nombresPareja);
 
     function enlaceWhatsApp(telefono, nombre) {
       const mensaje = confirmacion.mensajeWhatsApp.replaceAll('{nombre}', nombre);
@@ -2429,6 +2551,46 @@
     progressTrack.addEventListener('input', () => {
       audio.currentTime = progressTrack.valueAsNumber;
     });
+    const visorFotos = document.getElementById('photo-viewer');
+    const fotoAmpliada = document.getElementById('photo-expanded');
+    const descripcionFoto = document.getElementById('photo-caption');
+
+    document.querySelectorAll('.photo-trigger').forEach(boton => {
+      const imagen = boton.querySelector('img');
+      boton.setAttribute('aria-label', 'Ampliar foto. ' + imagen.alt);
+      boton.addEventListener('click', () => {
+        fotoAmpliada.src = imagen.currentSrc || imagen.src;
+        fotoAmpliada.alt = imagen.alt;
+        descripcionFoto.textContent = imagen.alt;
+        visorFotos.showModal();
+        document.documentElement.classList.add('photo-viewer-open');
+      });
+    });
+    document.getElementById('photo-close').addEventListener('click', () => visorFotos.close());
+    visorFotos.addEventListener('click', evento => {
+      if (evento.target === visorFotos) visorFotos.close();
+    });
+    visorFotos.addEventListener('close', () => {
+      document.documentElement.classList.remove('photo-viewer-open');
+      fotoAmpliada.removeAttribute('src');
+    });
+
+    // El contenido se mantiene visible si el navegador no admite la animación.
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observador = new IntersectionObserver(entradas => {
+        entradas.forEach(entrada => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add('is-visible');
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -24px 0px', threshold: 0 });
+      document.querySelectorAll('.container > section, .invitation-message, footer').forEach(elemento => {
+        elemento.classList.add('scroll-reveal');
+        observador.observe(elemento);
+      });
+    }
+
   </script>
 </body>
 
