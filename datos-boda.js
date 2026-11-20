@@ -65,7 +65,7 @@ const datosBoda = {
 
   fotos: {
     sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg",
-    portada: "https://res.cloudinary.com/y3rmpmag/image/upload/v1784068595/ImagenBoda_gucsff.jpg",
+    portada: "/fotos/portada.png",
     // Cuatro fotos en orden. Las rutas se publican junto con la carpeta fotos.
     // {pareja} se sustituye por los nombres de los novios.
     // posicion controla el encuadre de la miniatura. El visor muestra la foto completa.
