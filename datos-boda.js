@@ -64,13 +64,13 @@ const datosBoda = {
   },
 
   fotos: {
-    sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795271610/2_IA_fmogcr.png",
+    sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795272442/FotoIA1_noabed.jpg",
     portada: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795270149/FotoPortada1_u9lben.png",
     // Cuatro fotos en orden. Las rutas se publican junto con la carpeta fotos.
     // {pareja} se sustituye por los nombres de los novios.
     // posicion controla el encuadre de la miniatura. El visor muestra la foto completa.
     carrete: [
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795271610/2_IA_fmogcr.png", descripcion: "", posicion: "50% 55%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795272442/FotoIA1_noabed.jpg", descripcion: "", posicion: "50% 55%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236197/Foto1_xtm0fp.png", descripcion: "", posicion: "50% 55%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236212/Foto4_xc6ifl.png", descripcion: "", posicion: "50% 42%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg", descripcion: "", posicion: "50% 70%" },
