@@ -65,20 +65,18 @@ const datosBoda = {
 
   fotos: {
     sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg",
-    portada: "/fotos/portada.png",
+    portada: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795270149/FotoPortada1_u9lben.png",
     // Cuatro fotos en orden. Las rutas se publican junto con la carpeta fotos.
     // {pareja} se sustituye por los nombres de los novios.
     // posicion controla el encuadre de la miniatura. El visor muestra la foto completa.
     carrete: [
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg", descripcion: "", posicion: "50% 70%" },
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236201/Foto2_smc24r.png", descripcion: "", posicion: "50% 42%" },
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/2_rl8dwq.jpg", descripcion: "", posicion: "50% 42%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236197/Foto1_xtm0fp.png", descripcion: "", posicion: "50% 55%" },
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/3_hwin8h.jpg", descripcion: "", posicion: "50% 55%" },
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236192/Foto3_a0d7iv.png", descripcion: "", posicion: "50% 55%" },
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236204/Foto5_gcyopb.png", descripcion: "", posicion: "50% 55%" },
-      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236212/Foto4_xc6ifl.png", descripcion: "", posicion: "50% 55%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236212/Foto4_xc6ifl.png", descripcion: "", posicion: "50% 42%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg", descripcion: "", posicion: "50% 70%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236211/Foto6_to179v.png", descripcion: "", posicion: "50% 55%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/3_hwin8h.jpg", descripcion: "", posicion: "50% 55%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236201/Foto2_smc24r.png", descripcion: "", posicion: "50% 55%" },
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236192/Foto3_a0d7iv.png", descripcion: "", posicion: "50% 55%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236210/Foto7_teagv6.png", descripcion: "", posicion: "50% 55%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/4_wzdh2q.jpg", descripcion: "", posicion: "50% 45%" }
     ],
