@@ -56,10 +56,10 @@ const datosBoda = {
     cuenta: "33597718988063",
     cci: "00233519771898806384",
     titular: "Alexandra Yarleque Núñez",
-    yapePlin: "933 439 738",
+    yapePlin: "933439738",
     recepcion: "También tendremos un espacio destinado para recibir sus sobres con mucho cariño.",
     mensaje: "Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, pueden hacerlo a través de las siguientes opciones:",
-    agradecimiento: "¡Gracias por ser parte de este día tan especial! 🤍"
+    agradecimiento: "¡Gracias por ser parte de este día tan especial!"
   },
 
   musica: {
