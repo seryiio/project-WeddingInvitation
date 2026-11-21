@@ -55,7 +55,11 @@ const datosBoda = {
     // Mantén las comillas para conservar los ceros iniciales.
     cuenta: "33597718988063",
     cci: "00233519771898806384",
-    mensaje: "Tu presencia hace que este día sea inolvidable. Si te nace tener un gesto especial con nosotros, estos son los medios disponibles:"
+    titular: "Alexandra Yarleque Núñez",
+    yapePlin: "933 439 738",
+    recepcion: "También tendremos un espacio destinado para recibir sus sobres con mucho cariño.",
+    mensaje: "Su presencia es nuestro mejor regalo. Si desean tener un detalle con nosotros, pueden hacerlo a través de las siguientes opciones:",
+    agradecimiento: "¡Gracias por ser parte de este día tan especial! 🤍"
   },
 
   musica: {

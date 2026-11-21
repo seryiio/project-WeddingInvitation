@@ -241,8 +241,7 @@
     }
 
     .family-card h3,
-    .info-item h3,
-    .gifts-account h3 {
+    .info-item h3 {
       color: var(--title);
       font: 600 clamp(1.15rem, 2.3vw, 1.5rem)/1.05 var(--display);
       margin-bottom: 0.5rem;
@@ -556,46 +555,6 @@
       place-items: center;
     }
 
-    .gift-layout {
-      display: grid;
-      grid-template-columns: 30% minmax(0, 1fr);
-      align-items: center;
-      gap: clamp(0.75rem, 3.5vw, 2.25rem);
-      padding-block: clamp(1rem, 3vw, 1.8rem);
-    }
-
-    .gift-art {
-      width: 100%;
-      max-width: 15rem;
-      height: auto;
-      justify-self: center;
-    }
-
-    .gifts-account {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      width: fit-content;
-      max-width: 100%;
-      margin: 0.65rem auto 0;
-      padding: 0.65rem clamp(0.55rem, 3vw, 1.6rem);
-      border-radius: 0.85rem;
-      background: #eee0d1;
-      text-align: left;
-      overflow-wrap: anywhere;
-      font-size: 1rem;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .gifts-account .icon {
-      width: 2rem;
-      height: 2rem;
-    }
-
-    .gifts-account h3 {
-      margin-bottom: 0.15rem;
-    }
-
     .adults-only {
       display: flex;
       align-items: center;
@@ -679,15 +638,6 @@
         grid-template-columns: 1fr;
       }
 
-      .gift-layout {
-        grid-template-columns: 1fr;
-        gap: 0.4rem;
-      }
-
-      .gift-art {
-        max-width: 8rem;
-      }
-
       .rsvp-btn {
         width: min(100%, 17rem);
         min-width: 0;
@@ -695,12 +645,6 @@
 
       .spray {
         opacity: 0.7;
-      }
-    }
-
-    @media (max-width: 24rem) {
-      .gifts-account .icon {
-        display: none;
       }
     }
 
@@ -955,22 +899,189 @@
     }
 
     #regalos {
-      padding-top: 0.8rem;
-      padding-bottom: clamp(2.5rem, 7vw, 4.5rem);
+      --gift-gold: #a87943;
+      --gift-line: #b78b52;
+      position: relative;
+      padding: clamp(1.6rem, 4.5vw, 3.75rem) clamp(0.85rem, 5vw, 4rem)
+        clamp(2.6rem, 7vw, 5rem);
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 17%, #fffaf0 0%, transparent 62%),
+        radial-gradient(ellipse at 100% 100%, #eedaad35, transparent 42%),
+        #faf3e5;
+      text-align: center;
     }
 
-    .gift-layout {
-      grid-template-columns: 34% minmax(0, 1fr);
+    .gift-content {
+      position: relative;
+      z-index: 1;
+      max-width: 46rem;
+      margin-inline: auto;
+    }
+
+    .gift-artwork {
+      position: relative;
+      width: min(68%, 19rem);
+      margin: 0 auto clamp(0.45rem, 1.5vw, 1rem);
+      background: radial-gradient(ellipse at 55% 61%, #ead09a60, transparent 66%);
     }
 
     .gift-art {
-      max-width: 20rem;
+      display: block;
+      width: 100%;
+      aspect-ratio: 220 / 150;
     }
 
-    .gifts-account {
-      border-radius: 2rem;
-      background: #eee0d1a6;
-      padding: 0.75rem clamp(0.75rem, 4vw, 2.25rem);
+    .gift-artwork .gift-heart {
+      position: absolute;
+      top: 16%;
+      right: -2%;
+      width: clamp(1.4rem, 5vw, 2.75rem);
+      height: auto;
+      color: var(--gift-gold);
+      transform: rotate(16deg);
+    }
+
+    #regalos .section-heading {
+      margin-bottom: clamp(0.8rem, 2.4vw, 1.25rem);
+    }
+
+    #regalos .section-title {
+      gap: clamp(0.2rem, 1.45vw, 0.8rem);
+      font-size: clamp(1.8rem, 6vw, 4.5rem);
+    }
+
+    #regalos .sprig {
+      width: clamp(1.2rem, 6vw, 3.5rem);
+      color: var(--gift-gold);
+    }
+
+    .gift-divider {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.5rem, 2vw, 1rem);
+      color: var(--gift-line);
+    }
+
+    .gift-divider::before,
+    .gift-divider::after {
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    .gift-divider--title {
+      width: 76%;
+      margin: clamp(0.6rem, 2vw, 1.05rem) auto 0;
+    }
+
+    .gift-heart {
+      display: block;
+      width: 1.05rem;
+      aspect-ratio: 1;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linejoin: round;
+    }
+
+    #regalos .gift-intro {
+      max-width: 36rem;
+      font-size: clamp(1.08rem, 2.7vw, 1.6rem);
+    }
+
+    .gift-options {
+      display: grid;
+      gap: clamp(0.8rem, 2.8vw, 1.7rem);
+      max-width: 40rem;
+      margin: clamp(1.45rem, 4.25vw, 2.6rem) auto 0;
+    }
+
+    .gift-option {
+      --gift-icon-size: clamp(2.55rem, 12vw, 6.15rem);
+      display: grid;
+      grid-template-columns: var(--gift-icon-size) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(0.58rem, 3.5vw, 1.9rem);
+      padding-inline: clamp(0rem, 1.5vw, 0.8rem);
+      text-align: left;
+    }
+
+    .gift-medallion {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: var(--gift-icon-size);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #fbf1db, #edd8af);
+    }
+
+    .gift-medallion .icon {
+      width: 56%;
+      height: 56%;
+      color: #9b672e;
+    }
+
+    .gift-medallion .gift-leaves {
+      position: absolute;
+      left: -17%;
+      bottom: 0;
+      width: 58%;
+      aspect-ratio: 2;
+      color: #9a8050;
+      transform: rotate(54deg) scaleX(-1);
+    }
+
+    .gift-option-copy {
+      padding-inline-start: clamp(0.6rem, 3.5vw, 1.8rem);
+      border-inline-start: 1px solid var(--gift-line);
+      overflow-wrap: anywhere;
+      font-size: clamp(1rem, 2.6vw, 1.45rem);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .gift-option-copy h3 {
+      margin-bottom: 0.25em;
+      color: var(--title);
+      font: 600 clamp(1.22rem, 3.1vw, 2rem)/1.07 var(--display);
+      text-wrap: balance;
+    }
+
+    .gift-thanks {
+      max-width: 24rem;
+      margin: clamp(1.65rem, 5vw, 3rem) auto 0;
+      color: var(--title);
+      font: 400 clamp(2.05rem, 6vw, 3.6rem)/0.95 "Mrs Saint Delafield", cursive;
+      text-wrap: balance;
+    }
+
+    .gift-divider--end {
+      width: min(52%, 18rem);
+      margin: 0.8rem auto 0;
+    }
+
+    .gift-corner {
+      position: absolute;
+      bottom: 0;
+      width: clamp(2.5rem, 15vw, 9rem);
+      aspect-ratio: 2;
+      color: #8b875a;
+      opacity: 0.66;
+      pointer-events: none;
+    }
+
+    .gift-corner--left {
+      left: 0;
+      transform: rotate(26deg);
+      transform-origin: left bottom;
+    }
+
+    .gift-corner--right {
+      right: 0;
+      transform: scaleX(-1) rotate(26deg);
+      transform-origin: center;
     }
 
     #rsvp {
@@ -1147,14 +1258,6 @@
       .event-icon .icon {
         width: 1.35rem;
         height: 1.35rem;
-      }
-
-      .gift-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .gift-art {
-        max-width: 10rem;
       }
 
       .rsvp-buttons {
@@ -1813,6 +1916,14 @@
       <ellipse cx="6" cy="18.5" rx="3" ry="2.5" />
       <ellipse cx="17" cy="15.5" rx="3" ry="2.5" />
     </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <rect x="7" y="2" width="10" height="20" rx="2" />
+      <path d="M11 18h2" />
+    </symbol>
+    <symbol id="i-envelope" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </symbol>
     <symbol id="i-bank" viewBox="0 0 24 24">
       <path d="m2 8 10-6 10 6ZM4 21h16M3 18h18M6 10v8m4-8v8m4-8v8m4-8v8" />
     </symbol>
@@ -2167,35 +2278,63 @@
           </svg>
         </section>
 
-        <section id="regalos" class="gift-layout" aria-labelledby="regalos-titulo">
-          <svg class="gift-art" aria-hidden="true">
-            <use href="#art-gift" />
-          </svg>
-          <div>
+        <section id="regalos" aria-labelledby="regalos-titulo">
+          <svg class="gift-corner gift-corner--left" aria-hidden="true"><use href="#art-sprig" /></svg>
+          <svg class="gift-corner gift-corner--right" aria-hidden="true"><use href="#art-sprig" /></svg>
+          <div class="gift-content">
             <header class="section-heading">
+              <div class="gift-artwork" aria-hidden="true">
+                <svg class="gift-art"><use href="#art-gift" /></svg>
+                <svg class="gift-heart"><use href="#i-heart" /></svg>
+              </div>
               <h2 class="section-title" id="regalos-titulo">
-                <svg class="sprig" aria-hidden="true">
-                  <use href="#art-sprig" />
-                </svg><span>Regalos</span><svg class="sprig" aria-hidden="true">
-                  <use href="#art-sprig" />
-                </svg>
+                <svg class="sprig" aria-hidden="true"><use href="#art-sprig" /></svg>
+                <span>Detalles y regalos</span>
+                <svg class="sprig" aria-hidden="true"><use href="#art-sprig" /></svg>
               </h2>
+              <div class="gift-divider gift-divider--title" aria-hidden="true"><svg class="gift-heart"><use href="#i-heart" /></svg></div>
             </header>
-            <p class="invite-text" data-boda="mensajeRegalos"></p>
-            <div class="gifts-account">
-              <svg class="icon" aria-hidden="true">
-                <use href="#i-bank" />
-              </svg>
-              <div>
-                <h3 data-boda="banco"></h3>
-                <p data-boda="cuenta"></p>
-                <p data-boda="cci"></p>
+            <p class="invite-text gift-intro" data-boda="mensajeRegalos"></p>
+            <div class="gift-options">
+              <div class="gift-option">
+                <div class="gift-medallion" aria-hidden="true">
+                  <svg class="icon"><use href="#i-bank" /></svg>
+                  <svg class="gift-leaves"><use href="#art-sprig" /></svg>
+                </div>
+                <div class="gift-option-copy">
+                  <h3 data-boda="banco"></h3>
+                  <p data-boda="cuenta"></p>
+                  <p data-boda="cci"></p>
+                  <p data-boda="titularRegalos"></p>
+                </div>
+              </div>
+              <div class="gift-divider" aria-hidden="true"><svg class="gift-heart"><use href="#i-heart" /></svg></div>
+              <div class="gift-option">
+                <div class="gift-medallion" aria-hidden="true">
+                  <svg class="icon"><use href="#i-phone" /></svg>
+                  <svg class="gift-leaves"><use href="#art-sprig" /></svg>
+                </div>
+                <div class="gift-option-copy">
+                  <h3>Yape / Plin</h3>
+                  <p data-boda="numeroYapePlin"></p>
+                  <p data-boda="titularRegalos"></p>
+                </div>
+              </div>
+              <div class="gift-divider" aria-hidden="true"><svg class="gift-heart"><use href="#i-heart" /></svg></div>
+              <div class="gift-option">
+                <div class="gift-medallion" aria-hidden="true">
+                  <svg class="icon"><use href="#i-envelope" /></svg>
+                  <svg class="gift-leaves"><use href="#art-sprig" /></svg>
+                </div>
+                <div class="gift-option-copy">
+                  <h3>Regalos en recepción</h3>
+                  <p data-boda="regalosRecepcion"></p>
+                </div>
               </div>
             </div>
+            <p class="gift-thanks" data-boda="agradecimientoRegalos"></p>
+            <div class="gift-divider gift-divider--end" aria-hidden="true"><svg class="gift-heart"><use href="#i-heart" /></svg></div>
           </div>
-          <svg class="paper-flow flip" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-            <use href="#art-paper-flow" />
-          </svg>
         </section>
 
         <section id="rsvp" aria-labelledby="rsvp-titulo">
@@ -2311,10 +2450,14 @@
       mujeres: vestimenta.mujeres,
       notaVestimenta: vestimenta.nota,
       cancion: musica.titulo,
-      banco: 'Cuenta ' + regalos.banco,
-      cuenta: 'N° Cuenta: ' + regalos.cuenta,
+      banco: 'Transferencia bancaria – ' + regalos.banco,
+      cuenta: 'Cuenta: ' + regalos.cuenta,
       cci: 'CCI: ' + regalos.cci,
+      titularRegalos: 'Titular: ' + regalos.titular,
+      numeroYapePlin: 'Número: ' + regalos.yapePlin,
+      regalosRecepcion: regalos.recepcion,
       mensajeRegalos: regalos.mensaje,
+      agradecimientoRegalos: regalos.agradecimiento,
       plazoConfirmacion: 'Te pedimos confirmar tu asistencia antes del '
         + fechaCivil(confirmacion.fechaLimite, fechaLarga) + ', escribiéndonos por WhatsApp o llamada.',
       avisoAdultos: confirmacion.avisoAdultos,
