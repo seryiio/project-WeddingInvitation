@@ -14,7 +14,7 @@ const datosBoda = {
 
   ceremonia: {
     fecha: "2026-12-13",
-    hora: "16:00",
+    hora: "16:30",
     lugar: "El Bosque Eventos y Restaurante",
     ciudad: "Huacho",
     pais: "Perú"
@@ -27,7 +27,7 @@ const datosBoda = {
   },
 
   itinerario: {
-    recepcion: { hora: "15:30", nombre: "Recepción" },
+    recepcion: { hora: "16:00", nombre: "Recepción" },
     ceremonia: { nombre: "Ceremonia" },
     cena: { hora: "19:00", nombre: "Cena" },
     baile: { hora: "21:00", nombre: "Baile" }
@@ -64,12 +64,13 @@ const datosBoda = {
   },
 
   fotos: {
-    sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg",
+    sobre: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795271610/2_IA_fmogcr.png",
     portada: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795270149/FotoPortada1_u9lben.png",
     // Cuatro fotos en orden. Las rutas se publican junto con la carpeta fotos.
     // {pareja} se sustituye por los nombres de los novios.
     // posicion controla el encuadre de la miniatura. El visor muestra la foto completa.
     carrete: [
+      { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795271610/2_IA_fmogcr.png", descripcion: "", posicion: "50% 55%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236197/Foto1_xtm0fp.png", descripcion: "", posicion: "50% 55%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795236212/Foto4_xc6ifl.png", descripcion: "", posicion: "50% 42%" },
       { archivo: "https://res.cloudinary.com/y3rmpmag/image/upload/v1795063576/1_pku8d9.jpg", descripcion: "", posicion: "50% 70%" },
